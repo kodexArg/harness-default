@@ -142,7 +142,13 @@ readme — their description lives here and in the docs tier.
   project: self-contained instruction packages an agent loads on demand,
   some attached to specific files or workflows. TBD.
 - **`docs/hooks/`** — LLM-agnostic automation attached to agent or tooling
-  lifecycle events. TBD.
+  lifecycle events. The first resident is the dispatch safety net
+  ([[adr-01-guardians]] rules 3 and 8): `guardian-dispatch` maps a batch's
+  changed files against the `watch:` globs each agent declares in its own
+  frontmatter and names the guardians owed; `pre-commit` speaks it at every
+  commit — wired once per clone with
+  `ln -s ../../docs/hooks/pre-commit .git/hooks/pre-commit`. It warns rather
+  than blocks: the duty it voices binds the agent that reads it.
 - **`docs/agents/`** — LLM-agnostic agent role definitions. The first
   residents are the two guardians — `guardian-prd` and `guardian-adr` — the
   verification gate for the PRD and the ADR set, made binding by

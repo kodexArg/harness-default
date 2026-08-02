@@ -2,7 +2,7 @@
 title: adr-01-guardians
 type: adr
 category: harness
-use_case: closing a batch of changes that touched PRD, the constitution, an ADR, or docs/agents/, defining or dispatching an agent, acting on a guardian verdict
+use_case: closing a batch of changes that touched PRD, the constitution, an ADR, docs/agents/, or docs/hooks/, defining or dispatching an agent, editing a guardian's watch list or the dispatch safety net, acting on a guardian verdict
 created: 2026-08-02
 modified: 2026-08-02
 tags: [adr, harness, guardians, agents]
@@ -42,6 +42,11 @@ in its definition under `docs/agents/`.
 7. Guardians triage before they sweep: a dispatch that touches nothing in the
    guardian's domain returns its passing verdict in one line, immediately —
    depth is spent only on plausible concerns.
+8. Each guardian's watchlist has one machine copy: the `watch:` glob list in
+   the frontmatter of its own definition, beside the prose that explains it.
+   The dispatch safety net (`docs/hooks/guardian-dispatch`) reads only that
+   key; a watched surface enters or leaves the watchlist by editing the
+   guardian's file, nowhere else.
 
 ## RELATED
 
@@ -49,6 +54,8 @@ in its definition under `docs/agents/`.
 
 - `docs/agents/guardian-prd.md` — the PRD guardian
 - `docs/agents/guardian-adr.md` — the ADR guardian
+- `docs/hooks/guardian-dispatch` — the dispatch safety net (rules 3, 8)
+- `docs/hooks/pre-commit` — the safety net's voice at commit time
 
 ### related files
 

@@ -103,7 +103,9 @@ keeps — the pick is about folders, the knowledge stays.
   [guardian-prd](docs/agents/guardian-prd.md) — which watch the
   health of the ADR set and the PRD;
   [adr-01](docs/adrs/adr-01-guardians.md) makes their verdicts binding.
-  Hooks are TBD.
+  The first hook is the guardians' safety net:
+  [guardian-dispatch](docs/hooks/guardian-dispatch) names the guardians a
+  batch owes, and [pre-commit](docs/hooks/pre-commit) says it at commit time.
 
 ## Structure
 
@@ -113,7 +115,7 @@ keeps — the pick is about folders, the knowledge stays.
 | `docs/` | The loose documents iterate with the code: glossary, use cases, user stories, architecture, frontend, backend, interfaces, services, API. |
 | `docs/adrs/` | Architecture Decision Records — discipline in [adr-00](docs/adrs/adr-00-discipline.md). |
 | `docs/assertions/` | Verifiable promises the project must keep, periodically re-checked — discipline in [assertion-00](docs/assertions/assertion-00-discipline.md). |
-| `docs/skills/`, `docs/hooks/`, `docs/agents/` | LLM-agnostic agent tooling — the guardian agents live in `docs/agents/`; skills and hooks TBD. |
+| `docs/skills/`, `docs/hooks/`, `docs/agents/` | LLM-agnostic agent tooling — the guardians live in `docs/agents/`, their dispatch safety net in `docs/hooks/`; skills TBD. |
 | `frontend/` + `backend/` | Code roots, the specific pair — classic fullstack webapp. |
 | `interfaces/` + `services/` | Code roots, the generalistic pair — many services, many interfaces. |
 | `state/` | Database state — Postgres docker volumes, SQLite files. Contents gitignored. |

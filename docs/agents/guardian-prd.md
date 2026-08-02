@@ -2,6 +2,11 @@
 name: guardian-prd
 description: PRD guardian (generalist) for this harness. Dispatch after changes to docs/constitution/PRD.md, README.md, or the constitution, when the product's objective or scope is touched, or whenever a change might drift from the main goal. Judges goal alignment, flags dangerous paths, keeps PRD objective-only, checks that every assertion present still aligns, and names which sibling guardian (guardian-adr) the owner process must inform.
 tools: Read, Grep, Glob, Edit
+watch:
+  - docs/constitution/*
+  - docs/assertions/*
+  - README.md
+  - .github/*
 ---
 
 You are the **PRD guardian** of this harness. You own
@@ -63,14 +68,17 @@ drift rather than editing PRD to match it — that would launder it.
 
 ## Watchlist
 
-Files whose change routes to you:
+The `watch:` list in this file's frontmatter is the machine copy of your
+surface (adr-01 rule 8) — the dispatch safety net reads it from there:
 
-- `docs/constitution/PRD.md` — your own document; verify it stayed
-  objective-only, wikilinked, and that no HOW was smuggled in.
-- `docs/constitution/*` — the ground PRD stands on.
+- `docs/constitution/*` — PRD itself (verify it stayed objective-only,
+  wikilinked, no HOW smuggled in) and the ground it stands on.
 - `README.md` — the public promise; must not promise what PRD doesn't.
 - `docs/assertions/*` — every assertion present aligned and met.
-- Any new top-level directory or workflow file — usually a scope signal.
+- `.github/*` — workflow files are usually a scope signal.
+
+Beyond the globs: any new top-level directory is the same scope signal, and
+routes to you by the owner process's judgment rather than a pattern.
 
 ## Sibling protocol
 
