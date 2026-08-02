@@ -5,10 +5,22 @@ status: active
 updated: 2026-08-02
 ---
 
-This harness keeps a project's written knowledge in two tiers, and the sorting
-rule is a single question: **is this both meaningful and stable?**
+This harness is a template for fullstack projects. It separates what the
+project **knows** (constitution, docs, ADRs, assertions) from what the
+project **is** (its code roots and state) and from the **agent tooling** that
+works on both (skills, hooks, agents). The written knowledge is served as a
+wikilink-aware vault by `markdown-vault-mcp` — see [The vault](#the-vault)
+below.
 
-## constitution/
+## Tiers and families
+
+A project's written knowledge lives in four roots, of two kinds.
+`constitution/` and `docs/` are **tiers**: every document sorts into one of
+them by a single question — **is this both meaningful and stable?** `adrs/`
+and `assertions/` are **families**: numbered, append-only files that do not
+sort — they accumulate, each ruled by its own `-00` discipline file.
+
+### constitution/
 
 The constitution holds what the project does not expect to change. These
 documents are foundational and binding: they are read first, they settle
@@ -19,7 +31,7 @@ A document earns its place here only by being both things at once — meaningful
 *and* stable. Meaningful but volatile belongs in `docs/`; stable but
 unimportant belongs in `docs/` too.
 
-## docs/
+### docs/
 
 Everything else lives in `docs/`, which covers two kinds of material:
 
@@ -29,16 +41,130 @@ Everything else lives in `docs/`, which covers two kinds of material:
 - **Documentation that is stable but not load-bearing.** Useful reference, kept
   current, but a change to it would not alter how the project is run.
 
-## How the current files sort
+### How the current files sort
 
 | File | Tier | Why |
 |---|---|---|
-| `INFRASTRUCTURE.md` | constitution | Set up once; barely varies afterwards. |
+| `INFRASTRUCTURE.md` | constitution | The bare metal beneath the project — cloud choice, resources. Set up once; barely varies. |
 | `ARCHITECTURE.md` | docs | Expected to vary as the system evolves. |
 | `API.md` | docs | Iterates constantly with the code. |
 | `FRONTEND.md` / `BACKEND.md` | docs | Describe the living code; iteration is the norm. |
+| `INTERFACES.md` / `SERVICES.md` | docs | Same reason — the generalistic counterparts of the pair above. |
 | `GLOSSARY.md` | docs | Canonical naming is meaningful, but the glossary grows for the entire life of the project — it fails the stability test. |
 
 When a new document appears, apply the same two tests: *would changing this
 alter how the project is run?* and *do we expect it to change again soon?*
 Only a yes to the first and a no to the second puts it in the constitution.
+
+## adrs/
+
+Architecture Decision Records: the memory of the why, not just the what. One
+file per decision with lasting impact; accepted ADRs are immutable and get
+superseded, never rewritten. Discipline and template in
+[adr-00](../adrs/adr-00-discipline.md).
+
+## assertions/
+
+Assertions are the project's enforceable promises, and the mechanism matters:
+they are how the constitution stops being prose and starts being checkable.
+
+A single paragraph can define an assertion — something that must be
+accomplished, stated with every rule it imposes:
+
+> The user can get their last three messages, three clicks away from the home
+> page, in a query, in less than 2 seconds.
+
+Each assertion lives in its own file in `assertions/`, states its rules
+first, and ends with a `## RELATED` open/close list — `###` chapters linking
+the tests, files, and anything else that realizes or verifies the promise. A
+skill reviews every assertion periodically: the links must resolve, and the
+promise must still hold.
+
+Assertions are always aligned with `PRD.md` and this constitution. They are
+the constitution made verifiable — when an assertion and the constitution
+disagree, the assertion is the one that is wrong. Their boundary with
+`REQUIREMENTS.md` is one of form: requirements *enumerate* what must hold;
+an assertion takes one promise and makes it *checkable* — concrete rules,
+linked evidence, periodic review. The discipline and template live in
+[assertion-00](../assertions/assertion-00-discipline.md).
+
+## Code roots — pick your pair
+
+The harness ships **two vocabularies for the same two slots**, side by side.
+**The first action in a new project is to pick one pair of folders and
+delete the other.** The pick is about folders only: all four documents —
+`FRONTEND.md`, `BACKEND.md`, `INTERFACES.md`, `SERVICES.md` — live together
+in `docs/` regardless.
+
+### frontend/ + backend/ — the specific pair
+
+For the classic fullstack webapp. One backend that owns everything — a
+Django REST Framework project is the archetype: routing, auth, ORM, admin,
+the whole service surface in a single place, so splitting it into "services"
+adds nothing. One frontend that is almost always a web client. Documented in
+`docs/FRONTEND.md` and `docs/BACKEND.md`.
+
+### interfaces/ + services/ — the generalistic pair
+
+For projects shaped like a constellation rather than a webapp: several small
+services (an API, an MCP server, workers, bots) and several interfaces (web,
+CLI, mobile, a Telegram bot). Each component gets its own subfolder —
+`services/api/`, `interfaces/cli/`. Documented in `docs/INTERFACES.md` and
+`docs/SERVICES.md`.
+
+### Picking
+
+The two pairs are the same duality at different plurality: a backend is the
+single-service case, a frontend the single-interface case. Pick by shape —
+one of each → `frontend/` + `backend/`; many of either → `interfaces/` +
+`services/`. Either way the architecture sentence stays the same:
+**interfaces talk to services, services own state.**
+
+### state/
+
+`state/` belongs to both worlds and survives the pick: everything
+database-related lives here — PostgreSQL docker volumes, SQLite files,
+dumps. Contents are gitignored; only the folder itself is tracked.
+
+All code roots hold code and runtime state, not knowledge: they are excluded
+from the vault, and they carry a `.gitkeep` instead of a readme — their
+description lives here and in the docs tier.
+
+## Agent tooling
+
+- **`skills/`** — skills agnostic to the LLM but useful for this project:
+  self-contained instruction packages an agent loads on demand, some attached
+  to specific files or workflows. TBD.
+- **`hooks/`** — LLM-agnostic automation attached to agent or tooling
+  lifecycle events. TBD.
+- **`agents/`** — LLM-agnostic agent role definitions. TBD.
+
+Also excluded from the vault: tooling conventions fix their filenames (a
+skill is always a `SKILL.md`), which would collide with the vault's naming
+rule below.
+
+## The vault
+
+The knowledge tiers — `constitution/`, `docs/`, `adrs/`, `assertions/`, plus
+the root `README.md` — are served as an Obsidian-style vault by
+[markdown-vault-mcp](https://github.com/pvliesdonk/markdown-vault-mcp)
+(recommended). The server config ships in `.mcp.json` with the vault rooted
+at the repository root; the local index lives in `.mvmcp/` and is gitignored,
+so each clone builds its own.
+
+```
+uv tool install markdown-vault-mcp
+```
+
+Working rules:
+
+- **Query the vault first** for any documentation question — search, read,
+  backlinks, similarity — before grepping the markdown by hand.
+- **Basenames are unique vault-wide.** A wikilink resolves by basename;
+  duplicates make it resolve to the wrong file. This is why the repository
+  has exactly one `README.md` (at the root, for GitHub) and why folders are
+  kept alive with `.gitkeep`, never with placeholder readmes.
+- **Wikilinks are welcome** between notes: `[[adr-00-discipline]]`,
+  `[[HARNESS]]`. The vault tracks them as a graph — backlinks, orphans,
+  broken links are all queryable.
+- **Reindex after a batch of edits** before trusting link queries again.

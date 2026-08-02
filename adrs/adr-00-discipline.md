@@ -50,8 +50,9 @@ are available.
 | `deprecated` | Was valid, no longer applies |
 | `superseded` | Replaced by another ADR (name it in `superseded-by`) |
 
-Once accepted, an ADR is immutable: history is never rewritten — write a new
-ADR that supersedes it.
+Once accepted, an ADR's body is immutable: history is never rewritten — write
+a new ADR that supersedes it. Only the frontmatter keeps moving (`status`,
+`superseded-by`, `updated`) as the decision's lifecycle advances.
 
 ## Template
 

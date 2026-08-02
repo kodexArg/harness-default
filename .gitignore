@@ -7,6 +7,13 @@ Thumbs.db
 .env
 .env.*
 
+# Database state — local only, never committed
+state/*
+!state/.gitkeep
+
+# markdown-vault-mcp local index (each clone builds its own)
+.mvmcp/
+
 # Common build artifacts (fullstack template)
 node_modules/
 __pycache__/
