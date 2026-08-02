@@ -51,6 +51,7 @@ Everything else sits directly in `docs/`, which covers two kinds of material:
 | `FRONTEND.md` / `BACKEND.md` | docs | Describe the living code; iteration is the norm. |
 | `INTERFACES.md` / `SERVICES.md` | docs | Same reason — the generalistic counterparts of the pair above. |
 | `GLOSSARY.md` | docs | Canonical naming is meaningful, but the glossary grows for the entire life of the project — it fails the stability test. |
+| `USE-CASES.md` / `USER-STORIES.md` | docs | Open/close lists — the behavior in Gherkin and the wants behind it; both churn for the life of the product. |
 
 When a new document appears, apply the same two tests: *would changing this
 alter how the project is run?* and *do we expect it to change again soon?*
@@ -145,7 +146,9 @@ readme — their description lives here and in the docs tier.
 - **`docs/agents/`** — LLM-agnostic agent role definitions. The first
   residents are the two guardians — `guardian-prd` and `guardian-adr` — the
   verification gate for the PRD and the ADR set, made binding by
-  [[adr-01-guardians]].
+  [[adr-01-guardians]]. `.claude/agents/` at the root is the Claude Code
+  link to this folder — one real copy, links everywhere else; another
+  runtime adds its own link the same way.
 
 Tooling lives under `docs/` with the knowledge it belongs to, but the vault
 excludes it: tooling conventions fix their filenames (a skill is always a

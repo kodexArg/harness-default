@@ -20,3 +20,6 @@ with its product's domain concepts.
 | owner process | The main agent driving a session: it dispatches guardians and honors their `notify` lists. |
 | vault | `docs/` served wikilink-aware by markdown-vault-mcp; the tooling folders are excluded. Basenames are unique vault-wide ([[HARNESS]]). |
 | code root | A top-level folder holding code or runtime state, outside the vault: `frontend/` + `backend/`, or `interfaces/` + `services/`, plus `state/`. |
+| use case | One behavior of the system as a Gherkin scenario — `UC-NN`, an open/close chapter of [[USE-CASES]]. |
+| user story | A person and a want — *As a, I want, so that* — `US-NN` in [[USER-STORIES]], accepted when its linked cases pass. |
+| open/close list | A list whose chapters open and close as the project evolves — churn is the norm; presence is what makes an entry current. |

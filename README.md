@@ -40,8 +40,9 @@ teeth: the constitution made checkable.
 They are completely optional — a project with none is healthy. Presence is
 what binds: every assertion that exists must be met.
 
-An assertion is a Gherkin use case made an assertion — the scenario collapsed
-into one paragraph that must always hold:
+An assertion is a Gherkin use case ([USE-CASES.md](docs/USE-CASES.md)) made
+an assertion — the scenario collapsed into one paragraph that must always
+hold:
 
 ```gherkin
 Given a value X stored in the database
@@ -79,6 +80,8 @@ The loose documents (directly in `docs/`) — they iterate with the code:
 | File | What it holds |
 |---|---|
 | [GLOSSARY.md](docs/GLOSSARY.md) | Canonical names for every domain concept — how we call each thing. |
+| [USE-CASES.md](docs/USE-CASES.md) | The system's behavior as Gherkin scenarios — an open/close list, cited as `UC-NN`. |
+| [USER-STORIES.md](docs/USER-STORIES.md) | Who wants what and why — `US-NN`, accepted when their linked cases pass. |
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System-level design — components, boundaries, and how they talk. |
 | [API.md](docs/API.md) | The API surface — endpoints, contracts, auth, versioning. |
 | [FRONTEND.md](docs/FRONTEND.md) / [BACKEND.md](docs/BACKEND.md) | Stack, structure, and conventions of the specific code-root pair. |
@@ -107,7 +110,7 @@ keeps — the pick is about folders, the knowledge stays.
 | Path | Purpose |
 |---|---|
 | `docs/constitution/` | Meaningful and stable — not expected to change: harness, PRD, requirements, conventions, localisation, infrastructure. |
-| `docs/` | The loose documents iterate with the code: glossary, architecture, frontend, backend, interfaces, services, API. |
+| `docs/` | The loose documents iterate with the code: glossary, use cases, user stories, architecture, frontend, backend, interfaces, services, API. |
 | `docs/adrs/` | Architecture Decision Records — discipline in [adr-00](docs/adrs/adr-00-discipline.md). |
 | `docs/assertions/` | Verifiable promises the project must keep, periodically re-checked — discipline in [assertion-00](docs/assertions/assertion-00-discipline.md). |
 | `docs/skills/`, `docs/hooks/`, `docs/agents/` | LLM-agnostic agent tooling — the guardian agents live in `docs/agents/`; skills and hooks TBD. |
