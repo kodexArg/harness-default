@@ -14,8 +14,8 @@ let the docs and the ADR discipline grow with the project.
 
 | Path | Purpose |
 |---|---|
-| `constitution/` | The non-negotiables: PRD, global conventions, localisation policy. |
-| `docs/` | Living technical documentation: glossary, infrastructure, architecture, frontend, backend, API. |
+| `constitution/` | Meaningful and stable — not expected to change: harness, PRD, requirements, conventions, localisation, infrastructure. |
+| `docs/` | Living technical documentation — iteration expected: glossary, architecture, frontend, backend, API. |
 | `adrs/` | Architecture Decision Records — discipline in [adr-00](adrs/adr-00-discipline.md). |
 | `skills/` | LLM-agnostic skills useful to the project (TBD). |
 | `hooks/` | LLM-agnostic hooks (TBD). |
