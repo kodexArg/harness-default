@@ -1,7 +1,6 @@
 ---
 title: Localisation
 description: Language policy for documentation and product copy
-status: active
 updated: 2026-08-02
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Assertion-00 — Assertion Discipline
 description: What an assertion is, how it is written, linked, and periodically verified
-status: active
 updated: 2026-08-02
 ---
 
@@ -61,7 +60,6 @@ Copy this block as the starting point for a new assertion.
 ---
 title: Assertion-NN — [Short name]
 description: [The promise, in one line]
-status: draft
 verified: never
 updated: YYYY-MM-DD
 ---

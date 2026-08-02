@@ -1,26 +1,26 @@
 ---
 title: Harness
 description: What this harness is, how its pieces fit together, and how to work inside it
-status: active
 updated: 2026-08-02
 ---
 
-This harness is a template for fullstack projects. It separates what the
-project **knows** (constitution, docs, ADRs, assertions) from what the
-project **is** (its code roots and state) and from the **agent tooling** that
-works on both (skills, hooks, agents). The written knowledge is served as a
-wikilink-aware vault by `markdown-vault-mcp` — see [The vault](#the-vault)
-below.
+This harness is a template for fullstack projects. Everything the project
+**knows** lives under `docs/` — the constitution, the living documents, the
+ADR and assertion families, and even the agent tooling. Outside `docs/`
+there is only what the project **is**: the code roots and their state. The
+written knowledge is served as a wikilink-aware vault by
+`markdown-vault-mcp` — see [The vault](#the-vault) below.
 
 ## Tiers and families
 
-A project's written knowledge lives in four roots, of two kinds.
-`constitution/` and `docs/` are **tiers**: every document sorts into one of
-them by a single question — **is this both meaningful and stable?** `adrs/`
-and `assertions/` are **families**: numbered, append-only files that do not
-sort — they accumulate, each ruled by its own `-00` discipline file.
+Written knowledge comes in two kinds of containers inside `docs/`.
+`docs/constitution/` and the documents sitting directly in `docs/` are
+**tiers**: every document sorts into one of them by a single question — **is
+this both meaningful and stable?** `docs/adrs/` and `docs/assertions/` are
+**families**: numbered, append-only files that do not sort — they
+accumulate, each ruled by its own `-00` discipline file.
 
-### constitution/
+### docs/constitution/
 
 The constitution holds what the project does not expect to change. These
 documents are foundational and binding: they are read first, they settle
@@ -28,12 +28,12 @@ arguments, and they are amended rarely and deliberately. Changing the
 constitution is an event, not routine upkeep.
 
 A document earns its place here only by being both things at once — meaningful
-*and* stable. Meaningful but volatile belongs in `docs/`; stable but
-unimportant belongs in `docs/` too.
+*and* stable. Meaningful but volatile belongs one level up, directly in
+`docs/`; stable but unimportant belongs there too.
 
-### docs/
+### docs/ — the loose documents
 
-Everything else lives in `docs/`, which covers two kinds of material:
+Everything else sits directly in `docs/`, which covers two kinds of material:
 
 - **Documents that iterate with the code.** `API.md` is the clearest case: the
   surface it describes moves constantly, and the document is expected to move
@@ -56,14 +56,17 @@ When a new document appears, apply the same two tests: *would changing this
 alter how the project is run?* and *do we expect it to change again soon?*
 Only a yes to the first and a no to the second puts it in the constitution.
 
-## adrs/
+## docs/adrs/
 
-Architecture Decision Records: the memory of the why, not just the what. One
-file per decision with lasting impact; accepted ADRs are immutable and get
-superseded, never rewritten. Discipline and template in
+Architecture Decision Records: the memory of the why, not just the what. An
+ADR is attached to a *theme* and states numbered rules; its policy may change
+many times in place — each displaced policy recorded in the ADR's own
+`REJECTED` section — without the file ever moving. Presence in `docs/adrs/`
+is what makes a rule binding, and a whole file retires to `docs/obsolete/`
+only when its theme ends. Discipline and template in
 [adr-00](../adrs/adr-00-discipline.md).
 
-## assertions/
+## docs/assertions/
 
 Assertions are the project's enforceable promises, and the mechanism matters:
 they are how the constitution stops being prose and starts being checkable.
@@ -74,7 +77,7 @@ accomplished, stated with every rule it imposes:
 > The user can get their last three messages, three clicks away from the home
 > page, in a query, in less than 2 seconds.
 
-Each assertion lives in its own file in `assertions/`, states its rules
+Each assertion lives in its own file in `docs/assertions/`, states its rules
 first, and ends with a `## RELATED` open/close list — `###` chapters linking
 the tests, files, and anything else that realizes or verifies the promise. A
 skill reviews every assertion periodically: the links must resolve, and the
@@ -126,31 +129,30 @@ one of each → `frontend/` + `backend/`; many of either → `interfaces/` +
 database-related lives here — PostgreSQL docker volumes, SQLite files,
 dumps. Contents are gitignored; only the folder itself is tracked.
 
-All code roots hold code and runtime state, not knowledge: they are excluded
-from the vault, and they carry a `.gitkeep` instead of a readme — their
-description lives here and in the docs tier.
+All code roots hold code and runtime state, not knowledge: they live outside
+`docs/` and outside the vault, and they carry a `.gitkeep` instead of a
+readme — their description lives here and in the docs tier.
 
 ## Agent tooling
 
-- **`skills/`** — skills agnostic to the LLM but useful for this project:
-  self-contained instruction packages an agent loads on demand, some attached
-  to specific files or workflows. TBD.
-- **`hooks/`** — LLM-agnostic automation attached to agent or tooling
+- **`docs/skills/`** — skills agnostic to the LLM but useful for this
+  project: self-contained instruction packages an agent loads on demand,
+  some attached to specific files or workflows. TBD.
+- **`docs/hooks/`** — LLM-agnostic automation attached to agent or tooling
   lifecycle events. TBD.
-- **`agents/`** — LLM-agnostic agent role definitions. TBD.
+- **`docs/agents/`** — LLM-agnostic agent role definitions. TBD.
 
-Also excluded from the vault: tooling conventions fix their filenames (a
-skill is always a `SKILL.md`), which would collide with the vault's naming
-rule below.
+Tooling lives under `docs/` with the knowledge it belongs to, but the vault
+excludes it: tooling conventions fix their filenames (a skill is always a
+`SKILL.md`), which would collide with the vault's naming rule below.
 
 ## The vault
 
-The knowledge tiers — `constitution/`, `docs/`, `adrs/`, `assertions/`, plus
-the root `README.md` — are served as an Obsidian-style vault by
+The vault root is `docs/`: everything documental is indexed, except the
+tooling folders above. It is served as an Obsidian-style vault by
 [markdown-vault-mcp](https://github.com/pvliesdonk/markdown-vault-mcp)
-(recommended). The server config ships in `.mcp.json` with the vault rooted
-at the repository root; the local index lives in `.mvmcp/` and is gitignored,
-so each clone builds its own.
+(recommended). The server config ships in `.mcp.json`; the local index lives
+in `.mvmcp/` and is gitignored, so each clone builds its own.
 
 ```
 uv tool install markdown-vault-mcp
@@ -161,9 +163,9 @@ Working rules:
 - **Query the vault first** for any documentation question — search, read,
   backlinks, similarity — before grepping the markdown by hand.
 - **Basenames are unique vault-wide.** A wikilink resolves by basename;
-  duplicates make it resolve to the wrong file. This is why the repository
-  has exactly one `README.md` (at the root, for GitHub) and why folders are
-  kept alive with `.gitkeep`, never with placeholder readmes.
+  duplicates make it resolve to the wrong file. This is why folders are kept
+  alive with `.gitkeep`, never with placeholder readmes, and why the
+  repository's only `README.md` sits at the root, outside the vault.
 - **Wikilinks are welcome** between notes: `[[adr-00-discipline]]`,
   `[[HARNESS]]`. The vault tracks them as a graph — backlinks, orphans,
   broken links are all queryable.

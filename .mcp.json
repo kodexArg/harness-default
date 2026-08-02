@@ -5,14 +5,14 @@
       "command": "markdown-vault-mcp",
       "args": ["serve"],
       "env": {
-        "MARKDOWN_VAULT_MCP_SOURCE_DIR": ".",
+        "MARKDOWN_VAULT_MCP_SOURCE_DIR": "docs",
         "MARKDOWN_VAULT_MCP_READ_ONLY": "false",
         "MARKDOWN_VAULT_MCP_INDEX_PATH": ".mvmcp/data/index.db",
         "MARKDOWN_VAULT_MCP_EMBEDDINGS_PATH": ".mvmcp/data/embeddings",
         "MARKDOWN_VAULT_MCP_STATE_PATH": ".mvmcp/data/state.json",
         "MARKDOWN_VAULT_MCP_EMBEDDING_PROVIDER": "fastembed",
         "MARKDOWN_VAULT_MCP_FASTEMBED_MODEL": "BAAI/bge-small-en-v1.5",
-        "MARKDOWN_VAULT_MCP_EXCLUDE": "frontend/**,backend/**,interfaces/**,services/**,state/**,skills/**,hooks/**,agents/**,.claude/**,.mvmcp/**,node_modules/**"
+        "MARKDOWN_VAULT_MCP_EXCLUDE": "skills/**,hooks/**,agents/**"
       }
     }
   }
