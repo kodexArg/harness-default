@@ -70,6 +70,8 @@ only when its theme ends. Discipline and template in
 
 Assertions are the project's enforceable promises, and the mechanism matters:
 they are how the constitution stops being prose and starts being checkable.
+The family is completely optional — a project with none is healthy; presence
+is what binds, and every assertion that exists must be met.
 
 A single paragraph can define an assertion — something that must be
 accomplished, stated with every rule it imposes:
@@ -140,7 +142,10 @@ readme — their description lives here and in the docs tier.
   some attached to specific files or workflows. TBD.
 - **`docs/hooks/`** — LLM-agnostic automation attached to agent or tooling
   lifecycle events. TBD.
-- **`docs/agents/`** — LLM-agnostic agent role definitions. TBD.
+- **`docs/agents/`** — LLM-agnostic agent role definitions. The first
+  residents are the two guardians — `guardian-prd` and `guardian-adr` — the
+  verification gate for the PRD and the ADR set, made binding by
+  [[adr-01-guardians]].
 
 Tooling lives under `docs/` with the knowledge it belongs to, but the vault
 excludes it: tooling conventions fix their filenames (a skill is always a

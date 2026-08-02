@@ -16,6 +16,10 @@ That single paragraph states the rules: what (the last three messages), how
 far (three clicks from home), how (one query), how fast (under 2 seconds).
 An assertion that cannot be checked is not an assertion — it is a wish.
 
+Assertions are completely optional: a project may have none, and that is a
+healthy state. Presence is what binds — every assertion that exists must be
+met.
+
 ## Naming
 
 ```
