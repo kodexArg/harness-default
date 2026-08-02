@@ -1,0 +1,15 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+
+# Secrets
+.env
+.env.*
+
+# Common build artifacts (fullstack template)
+node_modules/
+__pycache__/
+.venv/
+dist/
+*.log
