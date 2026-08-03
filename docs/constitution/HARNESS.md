@@ -52,6 +52,8 @@ Everything else sits directly in `docs/`, which covers two kinds of material:
 | `INTERFACES.md` / `SERVICES.md` | docs | Same reason — the generalistic counterparts of the pair above. |
 | `GLOSSARY.md` | docs | Canonical naming is meaningful, but the glossary grows for the entire life of the project — it fails the stability test. |
 | `USE-CASES.md` / `USER-STORIES.md` | docs | Open/close lists — the behavior in Gherkin and the wants behind it; both churn for the life of the product. |
+| `TDD.md` | docs | Working method for assertion-driven delivery — iterates with how the project ships laws into tests and code. |
+| `CLONE.md` | docs | First-run operator checklist — code roots, hooks, vault, delivery. |
 
 When a new document appears, apply the same two tests: *would changing this
 alter how the project is run?* and *do we expect it to change again soon?*
@@ -69,29 +71,35 @@ only when its theme ends. Discipline and template in
 
 ## docs/assertions/
 
-Assertions are the project's enforceable promises, and the mechanism matters:
-they are how the constitution stops being prose and starts being checkable.
-The family is completely optional — a project with none is healthy; presence
-is what binds, and every assertion that exists must be met.
+Assertions are the harness's **novel piece**: owner-reserved **laws** that a
+skill must pass. Everything else in this tree is ordinary scaffolding plus
+opinionated PRD and ADRs-as-rules; assertions are the entry path for
+solutions that manifest first as proving tests ([[TDD]]) and then as code.
 
-A single paragraph can define an assertion — something that must be
-accomplished, stated with every rule it imposes:
+The family is completely optional — a project with none is healthy. They
+stay few because each one costs real compute (interpret, demand tests,
+implement, re-verify). Presence is what binds: every assertion that exists
+must be met.
+
+A single paragraph defines the law — every rule it imposes, concrete enough
+to check:
 
 > The user can get their last three messages, three clicks away from the home
 > page, in a query, in less than 2 seconds.
 
 Each assertion lives in its own file in `docs/assertions/`, states its rules
-first, and ends with a `## RELATED` open/close list — `###` chapters linking
-the tests, files, and anything else that realizes or verifies the promise. A
-skill reviews every assertion periodically: the links must resolve, and the
-promise must still hold.
+first, and ends with a `## RELATED` open/close list. The `### Tests` chapter
+must link runnable tests that **demonstrate** the law (e.g. latency ≤ 500ms
+→ a test that fails above that bound). The `assertion-review` skill
+interprets the paragraph, demands those tests via [[TDD]], drives the fix or
+feature, and stamps `verified` only when the tests pass.
 
 Assertions are always aligned with `PRD.md` and this constitution. They are
 the constitution made verifiable — when an assertion and the constitution
 disagree, the assertion is the one that is wrong. Their boundary with
 `REQUIREMENTS.md` is one of form: requirements *enumerate* what must hold;
-an assertion takes one promise and makes it *checkable* — concrete rules,
-linked evidence, periodic review. The discipline and template live in
+an assertion takes one promise and makes it a law with a proving path. The
+discipline and template live in
 [assertion-00](../assertions/assertion-00-discipline.md).
 
 ## Code roots — pick your pair
@@ -136,11 +144,27 @@ All code roots hold code and runtime state, not knowledge: they live outside
 `docs/` and outside the vault, and they carry a `.gitkeep` instead of a
 readme — their description lives here and in the docs tier.
 
+## Issue delivery — triage-and-fix
+
+This harness owns the **law** and the **delivery cast**. Taking one GitHub
+issue to a PR is the in-tree party: skill `docs/skills/triage-and-fix/`,
+cast `docs/agents/kwf-*.md`. Binding rules: [[adr-02-issue-delivery]].
+Operator steps: [[CLONE]]. Runtime spawn map (Kimi / Claude / Cursor-Grok):
+`docs/skills/triage-and-fix/references/runtimes.md`.
+
+Phases: forest → tavern → camp → stalking → plaza → post-bard. After plaza,
+the owner process runs `guardian-dispatch`, dispatches owed guardians
+([[adr-01-guardians]]), and runs `assertion-review` when assertions were
+touched. Important features enter as assertion laws ([[TDD]]), not as
+silent code.
+
 ## Agent tooling
 
 - **`docs/skills/`** — skills agnostic to the LLM but useful for this
-  project: self-contained instruction packages an agent loads on demand,
-  some attached to specific files or workflows. TBD.
+  project: self-contained instruction packages an agent loads on demand.
+  Residents: `assertion-review` (laws → tests → code via [[TDD]]) and
+  `triage-and-fix` (issue → PR party). Wire each into the runtime's skill
+  discovery (symlink or reference).
 - **`docs/hooks/`** — LLM-agnostic automation attached to agent or tooling
   lifecycle events. The first resident is the dispatch safety net
   ([[adr-01-guardians]] rules 3 and 8): `guardian-dispatch` maps a batch's
@@ -148,13 +172,14 @@ readme — their description lives here and in the docs tier.
   frontmatter and names the guardians owed; `pre-commit` speaks it at every
   commit — wired once per clone with
   `ln -s ../../docs/hooks/pre-commit .git/hooks/pre-commit`. It warns rather
-  than blocks: the duty it voices binds the agent that reads it.
-- **`docs/agents/`** — LLM-agnostic agent role definitions. The first
-  residents are the two guardians — `guardian-prd` and `guardian-adr` — the
-  verification gate for the PRD and the ADR set, made binding by
-  [[adr-01-guardians]]. `.claude/agents/` at the root is the Claude Code
-  link to this folder — one real copy, links everywhere else; another
-  runtime adds its own link the same way.
+  than blocks: the duty it voices binds the agent that reads it. The same
+  script is the post-bard entry for [[adr-02-issue-delivery]].
+- **`docs/agents/`** — agent role definitions. Guardians (`guardian-prd`,
+  `guardian-adr`) gate the PRD and ADR set ([[adr-01-guardians]]). The
+  `kwf-*` cast (18 nodes) runs issue delivery ([[adr-02-issue-delivery]]).
+  `.claude/agents/` at the root is the Claude Code link to this folder —
+  one real copy, links everywhere else; Kimi uses `extra_agent_dirs`;
+  Cursor/Grok injects the files per `runtimes.md`.
 
 Tooling lives under `docs/` with the knowledge it belongs to, but the vault
 excludes it: tooling conventions fix their filenames (a skill is always a

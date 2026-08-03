@@ -24,8 +24,9 @@ horizon, and the direction beyond it. A horizon, not a backlog.]
 Watch the assertions first. A conventional PRD inlines its use cases and
 user stories here; this harness keeps behavior with its owners:
 
-- **`docs/assertions/`** — the promises. Every assertion that exists is
-  binding and checkable; none existing is healthy
+- **`docs/assertions/`** — the laws. Owner-reserved, kept few; every
+  assertion that exists is binding and proven by linked tests through
+  [[TDD]] and `assertion-review`. None existing is healthy
   ([[assertion-00-discipline]]).
 - **[[USE-CASES]]** — the behavior, in Gherkin, an open/close list.
 - **[[USER-STORIES]]** — who wants what and why, accepted through their
