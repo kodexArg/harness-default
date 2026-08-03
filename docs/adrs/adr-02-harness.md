@@ -51,6 +51,12 @@ and delivery themes have their own ADRs.
 7. **Guardians are agents, not a separate tier.** `guardian-prd` and
    `guardian-adr` live under `docs/agents/` with the rest of the cast.
    Their verdicts and watchlists are governed by [[adr-03-guardians]].
+8. **Souls are optional personality sidecars.** Voice/posture for an agent
+   may live in `docs/agents/souls/<name>.md`, declared as `soul:` in the
+   agent's frontmatter. Runtimes that do not load souls natively: the owner
+   process prepends that file when dispatching. Soul never invents law;
+   contracts and ADRs outrank voice. (Agent Skills have `SKILL.md`; souls
+   are the parallel for agent personality — not a second SSOT for rules.)
 
 ## FORBIDDEN
 
@@ -68,6 +74,7 @@ and delivery themes have their own ADRs.
 - `docs/skills/` — skill packages
 - `docs/hooks/` — lifecycle automation
 - `docs/agents/` — agent definitions (guardians + `kwf-*`)
+- `docs/agents/souls/` — personality sidecars (`soul:` frontmatter)
 - `.claude/agents` — Claude Code link to `docs/agents/` (not a second copy)
 
 ### related files
