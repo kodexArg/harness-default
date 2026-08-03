@@ -26,7 +26,7 @@ deliverable is the triage; every downstream node reads it and nothing else of yo
      forbids what the issue asks. Cite file and rule in `constitutionNotes`. On a
      harness-default clone: inventing a new assertion without the owner, or claiming an
      existing assertion is met without proving tests (`docs/TDD.md`), is forbidden ground
-     — set `false` and cite `docs/assertions/` / adr-02.
+     — set `false` and cite `docs/assertions/` / adr-01 / adr-04.
    - `requirementsOk` — parse the issue body for requirement lines (`Requires PR: #N`,
      `Requires: #N, #M`). For each required PR run
      `python3 docs/skills/triage-and-fix/bin/kwf-deps status <N>`:

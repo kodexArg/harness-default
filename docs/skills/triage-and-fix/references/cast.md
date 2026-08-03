@@ -135,7 +135,7 @@ enforcement that it can spawn *only* its familiars.
   mage/sorcerer for familiars).
 - **Post-bard hooks** — **in force**: after bard, the orchestrator runs
   `docs/hooks/guardian-dispatch` and `assertion-review` when assertions moved. See
-  Post-bard in `SKILL.md` and [[adr-02-issue-delivery]]. Verifier / smoke-test pause
+  Post-bard in `SKILL.md` and [[adr-04-issue-delivery]]. Verifier / smoke-test pause
   remain open.
 - **Cursor/Grok registry** — no native `kwf-*` types; prompt-inject via `Task` per
   `runtimes.md`. First-class registry support would remove that adapter layer.

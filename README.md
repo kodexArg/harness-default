@@ -77,7 +77,7 @@ Step-by-step: [CLONE.md](docs/CLONE.md).
 
 GitHub issue → PR ships **in this template**: skill
 [triage-and-fix](docs/skills/triage-and-fix/SKILL.md), cast
-`docs/agents/kwf-*.md`, binding [adr-02](docs/adrs/adr-02-issue-delivery.md).
+`docs/agents/kwf-*.md`, binding [adr-04](docs/adrs/adr-04-issue-delivery.md).
 Phases: forest → tavern → camp → stalking → plaza → post-bard
 (`guardian-dispatch` + `assertion-review`). Runtime adapters (Kimi, Claude,
 Cursor/Grok):
@@ -88,7 +88,10 @@ Assertions remain the entry path for important features — TDD first.
 
 Decisions live as ADRs. Each ADR owns a theme for as long as the theme
 lives — its policy changes in place, keeping history in `REJECTED`. Shape,
-frontmatter, lifecycle: [adr-00](docs/adrs/adr-00-discipline.md).
+frontmatter, lifecycle: [adr-00](docs/adrs/adr-00-discipline.md). First
+project law: [adr-01 constitution](docs/adrs/adr-01-constitution.md) (source
+markdown). Tooling surface: [adr-02 harness](docs/adrs/adr-02-harness.md)
+(skills, hooks, agents).
 
 ### The files
 
@@ -127,11 +130,12 @@ keeps — the pick is about folders, the knowledge stays.
   [assertion-review](docs/skills/assertion-review/SKILL.md) (laws → tests →
   code via [TDD.md](docs/TDD.md)) and
   [triage-and-fix](docs/skills/triage-and-fix/SKILL.md) (issue → PR).
-- **Agents** (`docs/agents/`) and **hooks** (`docs/hooks/`): guardians
+- **Agents** (`docs/agents/`) and **hooks** (`docs/hooks/`): governed by
+  [adr-02](docs/adrs/adr-02-harness.md); guardians
   ([guardian-adr](docs/agents/guardian-adr.md),
   [guardian-prd](docs/agents/guardian-prd.md)) per
-  [adr-01](docs/adrs/adr-01-guardians.md); the `kwf-*` delivery cast per
-  [adr-02](docs/adrs/adr-02-issue-delivery.md);
+  [adr-03](docs/adrs/adr-03-guardians.md); the `kwf-*` delivery cast per
+  [adr-04](docs/adrs/adr-04-issue-delivery.md);
   [guardian-dispatch](docs/hooks/guardian-dispatch) /
   [pre-commit](docs/hooks/pre-commit) as the safety net.
 
@@ -141,7 +145,7 @@ keeps — the pick is about folders, the knowledge stays.
 |---|---|
 | `docs/constitution/` | Meaningful and stable — harness, PRD, requirements, conventions, localisation, infrastructure. |
 | `docs/` | Loose documents that iterate with the code: glossary, use cases, user stories, TDD, architecture, stack docs, API. |
-| `docs/adrs/` | Architecture Decision Records — [adr-00](docs/adrs/adr-00-discipline.md). |
+| `docs/adrs/` | Architecture Decision Records — [adr-00](docs/adrs/adr-00-discipline.md), [adr-01](docs/adrs/adr-01-constitution.md), [adr-02](docs/adrs/adr-02-harness.md), … |
 | `docs/assertions/` | Owner-reserved laws; entry path for solutions via tests — [assertion-00](docs/assertions/assertion-00-discipline.md). |
 | `docs/skills/`, `docs/hooks/`, `docs/agents/` | Agent tooling — assertion-review, triage-and-fix, guardians, `kwf-*` cast, dispatch safety net. |
 | [CLONE.md](docs/CLONE.md) | First-run checklist (code roots, hooks, vault, delivery). |

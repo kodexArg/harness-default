@@ -13,13 +13,13 @@ with its product's domain concepts.
 | tier | A sorting container for written knowledge: `docs/constitution/` or the loose documents directly in `docs/`. A document sorts by one question — is it both meaningful and stable? |
 | family | A numbered, append-only line of files that accumulates rather than sorts — ADRs, assertions — each ruled by its own `-00` discipline file. |
 | constitution | The stable tier: foundational, binding documents read first and amended rarely. Changing it is an event. |
-| ADR | Architecture Decision Record — the memory of the why. Attached to a theme, states numbered rules; presence in `docs/adrs/` is what makes it binding ([[adr-00-discipline]]). |
+| ADR | Architecture Decision Record — the memory of the why. Attached to a theme, states numbered rules; presence in `docs/adrs/` is what makes it binding ([[adr-00-discipline]]). First law: [[adr-01-constitution]]; tooling: [[adr-02-harness]]. |
 | assertion | Owner-reserved law: a Gherkin use case collapsed to one paragraph that a skill must pass via proving tests ([[TDD]], `assertion-review`). Completely optional and kept few; presence is what binds ([[assertion-00-discipline]]). |
 | TDD | Test-first method for assertion-driven work: failing tests that encode the law, then the code that passes them — [[TDD]]. |
-| triage-and-fix | In-tree issue→PR party — skill `docs/skills/triage-and-fix/`, cast `docs/agents/kwf-*`, phases forest→tavern→camp→stalking→plaza→post-bard ([[adr-02-issue-delivery]]). |
+| triage-and-fix | In-tree issue→PR party — skill `docs/skills/triage-and-fix/`, cast `docs/agents/kwf-*`, phases forest→tavern→camp→stalking→plaza→post-bard ([[adr-04-issue-delivery]]). |
 | kwf-* | Delivery cast nodes (hunter, falcon, hound, mage, sorcerer, familiars, inquisitor, camp builders, priest, shadow, bard). |
 | stage / phase | One segment of the triage-and-fix pipeline (forest, tavern, camp, stalking, plaza, post-bard). |
-| guardian | An agent that gates the health of one document set — `guardian-prd` for the objective, `guardian-adr` for the rules. Reports to the owner process, never dispatches ([[adr-01-guardians]]). |
+| guardian | An agent that gates the health of one document set — `guardian-prd` for the objective, `guardian-adr` for the rules. Reports to the owner process, never dispatches ([[adr-03-guardians]]). |
 | owner | The human the project belongs to — the one source of policy-change authorization. |
 | owner process | The main agent driving a session: it dispatches guardians and honors their `notify` lists. |
 | vault | `docs/` served wikilink-aware by markdown-vault-mcp; the tooling folders are excluded. Basenames are unique vault-wide ([[HARNESS]]). |

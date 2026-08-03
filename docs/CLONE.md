@@ -5,7 +5,7 @@ updated: 2026-08-02
 ---
 
 Operator steps for a new project from this template. Order matters where
-noted. Detail lives in [[HARNESS]] and [[adr-02-issue-delivery]].
+noted. Detail lives in [[HARNESS]] and [[adr-04-issue-delivery]].
 
 ## 1. Pick a code-root pair
 
@@ -24,7 +24,7 @@ Leave `state/`. Keep all four stack documents under `docs/`.
 ln -s ../../docs/hooks/pre-commit .git/hooks/pre-commit
 ```
 
-Warns at commit when guardians are owed ([[adr-01-guardians]]). Does not
+Warns at commit when guardians are owed ([[adr-03-guardians]]). Does not
 block; the owner process still must dispatch.
 
 Link guardians (and the `kwf-*` cast) into the runtime that will use them —
@@ -65,7 +65,7 @@ Do **not** add product assertions until the owner reserves compute for a law
 
 ## 6. Issue delivery (triage-and-fix)
 
-Cast and skill already ship in this clone ([[adr-02-issue-delivery]]):
+Cast and skill already ship in this clone ([[adr-04-issue-delivery]]):
 
 1. Confirm the runtime can see `docs/agents/kwf-*.md` (Claude symlink, Kimi
    `extra_agent_dirs`, or Cursor/Grok prompt injection per `runtimes.md`).

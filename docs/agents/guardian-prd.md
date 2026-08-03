@@ -69,7 +69,7 @@ drift rather than editing PRD to match it — that would launder it.
 ## Watchlist
 
 The `watch:` list in this file's frontmatter is the machine copy of your
-surface (adr-01 rule 8) — the dispatch safety net reads it from there:
+surface (adr-03 rule 8) — the dispatch safety net reads it from there:
 
 - `docs/constitution/*` — PRD itself (verify it stayed objective-only,
   wikilinked, no HOW smuggled in) and the ground it stands on.

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""guardian-dispatch — the dispatch safety net (adr-01 rules 3 and 8).
+"""guardian-dispatch — the dispatch safety net (adr-03 rules 3 and 8).
 
 Maps a batch of changed files against the `watch:` globs each agent declares
 in the frontmatter of its definition under docs/agents/, and names the
 guardians the owner process must dispatch before the batch closes. The
-`watch:` key is the single machine copy of every watchlist (adr-01 rule 8);
+`watch:` key is the single machine copy of every watchlist (adr-03 rule 8);
 this script only reads it — it never carries a list of its own.
 
 Runtime-agnostic on purpose: git + python3 stdlib, nothing else. Any agent
@@ -97,11 +97,11 @@ def main(argv: list[str]) -> int:
         print(f"guardian-dispatch: {len(files)} file(s) in batch — no guardian owed.")
         return 0
 
-    print(f"guardian-dispatch: {len(owed)} guardian(s) owed for this batch (adr-01 rule 3)")
+    print(f"guardian-dispatch: {len(owed)} guardian(s) owed for this batch (adr-03 rule 3)")
     for guardian, hits in sorted(owed.items()):
         shown = ", ".join(hits[:4]) + (f", +{len(hits) - 4} more" if len(hits) > 4 else "")
         print(f"  -> {guardian} — {len(hits)} file(s): {shown}")
-    print("Dispatch each before the batch closes; violation/danger blocks (adr-01 rule 5).")
+    print("Dispatch each before the batch closes; violation/danger blocks (adr-03 rule 5).")
     return 1
 
 

@@ -1,5 +1,5 @@
 ---
-title: adr-02-issue-delivery
+title: adr-04-issue-delivery
 type: adr
 category: harness
 use_case: running a GitHub issue through delivery, wiring or changing the triage party, cloning a project that will use issue delivery, closing a party run that touched law or assertions
@@ -8,7 +8,7 @@ modified: 2026-08-02
 tags: [adr, harness, triage-and-fix, delivery, assertions]
 ---
 
-# ADR-02 — issue delivery (triage-and-fix)
+# ADR-04 — issue delivery (triage-and-fix)
 
 ## CONTEXT
 
@@ -16,7 +16,9 @@ tags: [adr, harness, triage-and-fix, delivery, assertions]
 > Runtimes differ; the phases, contracts, and assertion duties do not.
 
 Rules only. Phase names, dispatch maps, and operator wiring live in the
-documents listed under RELATED — not in this ADR.
+documents listed under RELATED — not in this ADR. Formerly numbered
+`adr-02`; renumbered to `adr-04` on 2026-08-02 so constitution and harness
+tooling own `01`/`02`.
 
 ## ASSERTIONS
 
@@ -30,12 +32,12 @@ documents listed under RELATED — not in this ADR.
    Cursor/Grok). A runtime may lack a native `kwf-*` registry; it still runs
    the same phases by injecting the agent files as prompts.
 3. Doctrine-first planning is binding: PRD and ADRs in force before a plan;
-   inquisitor before camp. That duty does not replace [[adr-01-guardians]] —
+   inquisitor before camp. That duty does not replace [[adr-03-guardians]] —
    guardians still gate law changes after publish.
 4. After plaza / bard publishes, the **owner process** closes the batch: run
    `docs/hooks/guardian-dispatch` against the delivered change set; dispatch
    every guardian owed; honor `violation` / `danger` / `needs-new-adr` per
-   [[adr-01-guardians]].
+   [[adr-03-guardians]].
 5. When a plan slice or delivered diff touches `docs/assertions/` or claims
    to satisfy an assertion law, builders follow [[TDD]] and the
    `assertion-review` skill: proving tests first, linked under `### Tests`,
@@ -85,7 +87,9 @@ documents listed under RELATED — not in this ADR.
 
 ### related files
 
-- [[adr-01-guardians]] — guardian duty the post-bard step honors
+- [[adr-01-constitution]] — assertions as feature entry path
+- [[adr-02-harness]] — skills/agents home
+- [[adr-03-guardians]] — guardian duty the post-bard step honors
 - [[assertion-00-discipline]] — laws camp/assertion-review must pass
 - [[TDD]] — test-first path when assertions are in play
 - [[HARNESS]] — delivery model in prose

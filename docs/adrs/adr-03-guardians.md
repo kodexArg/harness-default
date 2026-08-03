@@ -1,5 +1,5 @@
 ---
-title: adr-01-guardians
+title: adr-03-guardians
 type: adr
 category: harness
 use_case: closing a batch of changes that touched PRD, the constitution, an ADR, docs/agents/, or docs/hooks/, defining or dispatching an agent, editing a guardian's watch list or the dispatch safety net, acting on a guardian verdict
@@ -8,7 +8,7 @@ modified: 2026-08-02
 tags: [adr, harness, guardians, agents]
 ---
 
-# ADR-01 — guardian agents
+# ADR-03 — guardian agents
 
 ## CONTEXT
 
@@ -17,7 +17,8 @@ tags: [adr, harness, guardians, agents]
 > makes their verdicts binding.
 
 Rules only; what each guardian is — posture, watchlist, output shape — lives
-in its definition under `docs/agents/`.
+in its definition under `docs/agents/`. Formerly numbered `adr-01`; renumbered
+to `adr-03` on 2026-08-02 so constitution and harness tooling own `01`/`02`.
 
 ## ASSERTIONS
 
@@ -60,5 +61,7 @@ in its definition under `docs/agents/`.
 ### related files
 
 - [[adr-00-discipline]] — the discipline both guardians enforce and obey
+- [[adr-01-constitution]] — written law the guardians protect
+- [[adr-02-harness]] — tooling home for agents and hooks
 - [[PRD]] — the document the PRD guardian owns
 - [[HARNESS]] — the agent-tooling tier these definitions live in

@@ -34,7 +34,7 @@ the plan against the project's **written law** — the PRD (the objective), the 
    must order TDD explicitly: read the assertion + `docs/TDD.md` → write/link proving
    tests under `### Tests` → then implement. Missing that sequence is a `violation`.
    Inventing a new assertion without the owner is a `violation` (cite
-   `assertion-00-discipline` / adr-02).
+   `assertion-00-discipline` / adr-04).
 4. **Judge the plan, not the code.** There is no code yet. You answer: *does this plan,
    if executed exactly as written, violate the objective or any active rule?*
 

@@ -67,7 +67,14 @@ many times in place — each displaced policy recorded in the ADR's own
 `REJECTED` section — without the file ever moving. Presence in `docs/adrs/`
 is what makes a rule binding, and a whole file retires to `docs/obsolete/`
 only when its theme ends. Discipline and template in
-[adr-00](../adrs/adr-00-discipline.md).
+[adr-00](../adrs/adr-00-discipline.md). Standing order of the harness ADRs:
+
+| ADR | Theme |
+|---|---|
+| [[adr-01-constitution]] | Source markdown — PRD, constitution, families, authority |
+| [[adr-02-harness]] | Skills, hooks, agents — tooling that serves the law |
+| [[adr-03-guardians]] | Guardian agents and the dispatch safety net |
+| [[adr-04-issue-delivery]] | triage-and-fix cast and skill |
 
 ## docs/assertions/
 
@@ -148,13 +155,13 @@ readme — their description lives here and in the docs tier.
 
 This harness owns the **law** and the **delivery cast**. Taking one GitHub
 issue to a PR is the in-tree party: skill `docs/skills/triage-and-fix/`,
-cast `docs/agents/kwf-*.md`. Binding rules: [[adr-02-issue-delivery]].
+cast `docs/agents/kwf-*.md`. Binding rules: [[adr-04-issue-delivery]].
 Operator steps: [[CLONE]]. Runtime spawn map (Kimi / Claude / Cursor-Grok):
 `docs/skills/triage-and-fix/references/runtimes.md`.
 
 Phases: forest → tavern → camp → stalking → plaza → post-bard. After plaza,
 the owner process runs `guardian-dispatch`, dispatches owed guardians
-([[adr-01-guardians]]), and runs `assertion-review` when assertions were
+([[adr-03-guardians]]), and runs `assertion-review` when assertions were
 touched. Important features enter as assertion laws ([[TDD]]), not as
 silent code.
 
@@ -167,16 +174,16 @@ silent code.
   discovery (symlink or reference).
 - **`docs/hooks/`** — LLM-agnostic automation attached to agent or tooling
   lifecycle events. The first resident is the dispatch safety net
-  ([[adr-01-guardians]] rules 3 and 8): `guardian-dispatch` maps a batch's
+  ([[adr-03-guardians]] rules 3 and 8): `guardian-dispatch` maps a batch's
   changed files against the `watch:` globs each agent declares in its own
   frontmatter and names the guardians owed; `pre-commit` speaks it at every
   commit — wired once per clone with
   `ln -s ../../docs/hooks/pre-commit .git/hooks/pre-commit`. It warns rather
   than blocks: the duty it voices binds the agent that reads it. The same
-  script is the post-bard entry for [[adr-02-issue-delivery]].
+  script is the post-bard entry for [[adr-04-issue-delivery]].
 - **`docs/agents/`** — agent role definitions. Guardians (`guardian-prd`,
-  `guardian-adr`) gate the PRD and ADR set ([[adr-01-guardians]]). The
-  `kwf-*` cast (18 nodes) runs issue delivery ([[adr-02-issue-delivery]]).
+  `guardian-adr`) gate the PRD and ADR set ([[adr-03-guardians]]). The
+  `kwf-*` cast (18 nodes) runs issue delivery ([[adr-04-issue-delivery]]).
   `.claude/agents/` at the root is the Claude Code link to this folder —
   one real copy, links everywhere else; Kimi uses `extra_agent_dirs`;
   Cursor/Grok injects the files per `runtimes.md`.

@@ -58,9 +58,9 @@ the two disagree, the code is the defect (rule 11).
 ## Watchlist
 
 The `watch:` list in this file's frontmatter is the machine copy of your
-surface (adr-01 rule 8) — the dispatch safety net reads it from there:
+surface (adr-03 rule 8) — the dispatch safety net reads it from there:
 `docs/adrs/*`, `docs/obsolete/*`, `docs/agents/*` and `docs/hooks/*` (the
-mechanism's own otherwise unguarded surfaces, adr-01), `docs/constitution/*`
+mechanism's own otherwise unguarded surfaces, adr-02 / adr-03), `docs/constitution/*`
 (the authority order the ADRs resolve beneath, adr-00 rule 11). Beyond the
 globs, every file a specific ADR names in its rules or `RELATED` also routes
 to you — the ADRs' own wikilinks keep that half true; verify against them

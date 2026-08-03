@@ -25,7 +25,8 @@ metadata:
 One issue in; a pull request, a comment on that issue, or a new issue out.
 
 Ships **inside harness-default** (`docs/agents/kwf-*` + this skill). Binding ADR:
-`docs/adrs/adr-02-issue-delivery.md`. Runtime spawn/model map:
+`docs/adrs/adr-04-issue-delivery.md` (law: `adr-01`, tooling: `adr-02`).
+Runtime spawn/model map:
 `references/runtimes.md`.
 
 Upgrades over the early Claude `kdx-wf-triage-and-fix` cast:

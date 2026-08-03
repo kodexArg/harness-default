@@ -166,6 +166,7 @@ tags: [adr, discipline]
 
 ### related files
 
+- [[adr-01-constitution]] — first project-law ADR beneath this discipline
 - [[HARNESS]] — how the harness fits together; names this family and its
   discipline
 - [[CONVENTION]] — the base frontmatter convention that this family's seven
