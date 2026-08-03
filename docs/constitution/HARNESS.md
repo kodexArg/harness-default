@@ -160,9 +160,10 @@ Operator steps: [[CLONE]]. Runtime spawn map (Kimi / Claude / Cursor-Grok):
 `docs/skills/triage-and-fix/references/runtimes.md`.
 
 Phases: forest → tavern → camp → stalking → plaza → post-bard. After plaza,
-the owner process runs `guardian-dispatch`, dispatches owed guardians
-([[adr-03-guardians]]), and runs `assertion-review` when assertions were
-touched. Important features enter as assertion laws ([[TDD]]), not as
+the owner process runs `guardian-dispatch --bundle`, pastes that payload
+into each owed guardian ([[adr-03-guardians]] rule 9), dispatches them in
+parallel on the cheap tier, and runs `assertion-review` when assertions
+were touched. Important features enter as assertion laws ([[TDD]]), not as
 silent code.
 
 ## Agent tooling
@@ -174,16 +175,19 @@ silent code.
   discovery (symlink or reference).
 - **`docs/hooks/`** — LLM-agnostic automation attached to agent or tooling
   lifecycle events. The first resident is the dispatch safety net
-  ([[adr-03-guardians]] rules 3 and 8): `guardian-dispatch` maps a batch's
+  ([[adr-03-guardians]] rules 3, 8, 9): `guardian-dispatch` maps a batch's
   changed files against the `watch:` globs each agent declares in its own
-  frontmatter and names the guardians owed; `pre-commit` speaks it at every
-  commit — wired once per clone with
+  frontmatter and names the guardians owed; `--bundle` adds hit paths, diff,
+  and a live ADR `use_case` index for the owner to paste into each guardian
+  prompt. `pre-commit` speaks the name-only form at every commit — wired
+  once per clone with
   `ln -s ../../docs/hooks/pre-commit .git/hooks/pre-commit`. It warns rather
   than blocks: the duty it voices binds the agent that reads it. The same
   script is the post-bard entry for [[adr-04-issue-delivery]].
 - **`docs/agents/`** — agent role definitions. Guardians (`guardian-prd`,
-  `guardian-adr`) gate the PRD and ADR set ([[adr-03-guardians]]). The
-  `kwf-*` cast (18 nodes) runs issue delivery ([[adr-04-issue-delivery]]).
+  `guardian-adr`) gate the PRD and ADR set ([[adr-03-guardians]]); both
+  declare `model_preference: cheap` and triage before opening law bodies.
+  The `kwf-*` cast (18 nodes) runs issue delivery ([[adr-04-issue-delivery]]).
   `.claude/agents/` at the root is the Claude Code link to this folder —
   one real copy, links everywhere else; Kimi uses `extra_agent_dirs`;
   Cursor/Grok injects the files per `runtimes.md`.

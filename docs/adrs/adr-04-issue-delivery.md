@@ -4,7 +4,7 @@ type: adr
 category: harness
 use_case: running a GitHub issue through delivery, wiring or changing the triage party, cloning a project that will use issue delivery, closing a party run that touched law or assertions
 created: 2026-08-02
-modified: 2026-08-02
+modified: 2026-08-03
 tags: [adr, harness, triage-and-fix, delivery, assertions]
 ---
 
@@ -35,7 +35,8 @@ tooling own `01`/`02`.
    inquisitor before camp. That duty does not replace [[adr-03-guardians]] —
    guardians still gate law changes after publish.
 4. After plaza / bard publishes, the **owner process** closes the batch: run
-   `docs/hooks/guardian-dispatch` against the delivered change set; dispatch
+   `docs/hooks/guardian-dispatch --bundle` against the delivered change set;
+   paste the payload and dispatch
    every guardian owed; honor `violation` / `danger` / `needs-new-adr` per
    [[adr-03-guardians]].
 5. When a plan slice or delivered diff touches `docs/assertions/` or claims
@@ -74,6 +75,9 @@ tooling own `01`/`02`.
 - **Vendoring as Kimi-only blobs with no runtime map** — copy agents without
   documenting Claude/Cursor-Grok dispatch. Rejected because the playbook's
   value is the phase contracts, not one CLI's `Agent` tool.
+- **Name-only post-bard guardian close** — run `guardian-dispatch` without
+  `--bundle` and let each guardian rediscover the batch. Rejected 2026-08-03
+  in favor of [[adr-03-guardians]] rule 9. Reopen only with that ADR.
 
 ## RELATED
 

@@ -91,5 +91,17 @@ and law links in the agent file win.
 1. YAML final-message contracts — never prose handoffs between phases.
 2. Dead / garbage node → phase abort (`hunter-failed`, …).
 3. Builders create their own git worktrees; bard merges path-disjoint slices.
-4. Post-bard: `guardian-dispatch` + `assertion-review` when assertions moved.
+4. Post-bard: `guardian-dispatch --bundle` (paste payload; cheap tier;
+   parallel when both owed) + `assertion-review` when assertions moved.
 5. `bin/kwf-deps` path: `docs/skills/triage-and-fix/bin/kwf-deps` from repo root.
+
+## Guardians (all runtimes)
+
+| Intent | Pin |
+|---|---|
+| cheap (default) | Kimi `kimi-for-coding` · Claude Haiku-class · Cursor `orch-low` or native `guardian-*` with cheapest available model |
+| escalate | mid/high only when triage cannot return the one-line pass |
+
+Owner always runs `python3 docs/hooks/guardian-dispatch --bundle …` and
+inlines that stdout into the guardian prompt before spawn. Do not let the
+guardian rediscover the batch.

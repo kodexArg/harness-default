@@ -73,7 +73,8 @@ Cast and skill already ship in this clone ([[adr-04-issue-delivery]]):
 3. Optional: vendor `docs/skills/triage-and-fix/extras/gha-kwf-deps.yml` into
    `.github/workflows/` for human-side defer cascades.
 4. After every plaza/bard publish, the owner process runs
-   `docs/hooks/guardian-dispatch`, dispatches owed guardians, and runs
+   `docs/hooks/guardian-dispatch --bundle`, pastes the payload into each
+   owed guardian (cheap tier, parallel), and runs
    `assertion-review` if `docs/assertions/` was touched.
 
 ## Done when
