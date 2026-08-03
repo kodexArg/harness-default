@@ -78,6 +78,14 @@ inquisitor findings (worse, but legal).
 Grok on this host follows the same Cursor adapter. Prefer heavy tiers for mage
 and inquisitor when available.
 
+## Souls
+
+Every `kwf-*` / guardian agent may declare `soul: docs/agents/souls/<name>.md`
+([[adr-02-harness]] rule 8). On dispatch, **prepend that file** to the node
+prompt when the host does not load `soul:` natively (Cursor/Grok always;
+Kimi/Claude if frontmatter is ignored). Soul is voice only — YAML contract
+and law links in the agent file win.
+
 ## Shared invariants (all runtimes)
 
 1. YAML final-message contracts — never prose handoffs between phases.
