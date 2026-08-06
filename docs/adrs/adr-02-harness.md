@@ -45,7 +45,10 @@ and delivery themes have their own ADRs.
    `kskill-assertion-review` (laws → tests → code) and `kskill-triage-and-fix` (issue →
    PR). Delivery mechanics: [[adr-04-issue-delivery]]. Everything else under
    `docs/skills/` is a **stack or utility skill** — it serves the law like any
-   other tool and carries no authority of its own.
+   other tool and carries no authority of its own. A skill ported from another
+   clone carries that clone's law citations: it says so in a banner at the top
+   until each citation is remapped to an ADR that exists here or deleted (rule
+   6 — the same prohibition, at body level).
 6. **Hooks are automation.** Hooks are LLM-agnostic scripts attached to
    agent or git lifecycle events. The dispatch safety net
    (`docs/hooks/khook-guardian-dispatch`, voiced by `docs/hooks/khook-pre-commit`)

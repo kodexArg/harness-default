@@ -8,6 +8,15 @@ description: >
   Never EKS, EC2 launch type, Express Mode, App Runner, or NAT.
 ---
 
+> [!warning] Inherited law — remap before trusting
+> This skill was ported from another clone of the harness. Where its body cites
+> an ADR or a document, that citation names the **origin project's** law, not
+> this one: only `adr-00`..`adr-04` exist here, and referenced docs may not.
+> Those citations are placeholders — nothing outside `docs/adrs/` in this clone
+> is in force ([[adr-01-constitution]]). On adoption, remap each one to this
+> project's own ADR or delete it; do not treat a dangling wikilink as a rule
+> ([[adr-02-harness]] rules 3 and 6).
+
 # kskill-aws-containers
 
 **Only stack:** ECS **Fargate** + **ECR** for the astro-drf-aws template on **ALVS** (`789650504128`, **us-east-1**). Doctrine: `docs/INFRASTRUCTURE.md`. Precedent: **sroa** on clusters `alvs-dev` / `alvs-prod`.

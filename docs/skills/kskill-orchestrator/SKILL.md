@@ -4,6 +4,15 @@ description: Switch the main chat into orchestrator mode as an Agent Team lead. 
 argument-hint: "[task]"
 ---
 
+> [!warning] Inherited law — remap before trusting
+> This skill was ported from another clone of the harness. Where its body cites
+> an ADR or a document, that citation names the **origin project's** law, not
+> this one: only `adr-00`..`adr-04` exist here, and referenced docs may not.
+> Those citations are placeholders — nothing outside `docs/adrs/` in this clone
+> is in force ([[adr-01-constitution]]). On adoption, remap each one to this
+> project's own ADR or delete it; do not treat a dangling wikilink as a rule
+> ([[adr-02-harness]] rules 3 and 6).
+
 # Orchestrator Mode — Agent Team Lead
 
 From this point forward, act as an **agent team lead**. Do NOT implement tasks directly. ALL work goes to teammates.
