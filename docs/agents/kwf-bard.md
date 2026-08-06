@@ -26,7 +26,7 @@ shadow on legibility; empty/failing `testsRun` and unrecorded deviations weigh a
 
 **hunted true:** merge N path-disjoint slice branches into one → one `gh pr create`.
 Real merge conflict → not hunted. Declare
-`python3 docs/skills/triage-and-fix/bin/kwf-deps requires <pr> <N...>`.
+`python3 docs/skills/kskill-triage-and-fix/bin/kwf-deps requires <pr> <N...>`.
 If a required PR is deferred → `kwf-deps cascade` on it.
 
 **hunted false:** prefer rich `comment-on-issue`; `open-new-issue` only for a *different*

@@ -29,7 +29,7 @@ Personality: load `docs/agents/souls/kwf-hunter.md` (voice only; law and contrac
    - `constitutionOk` — false only if written law forbids the ask. Cite file+rule.
      Inventing assertions / claiming met without [[TDD]] → false (adr-01 / adr-04)
    - `requirementsOk` — parse `Requires PR: #N`; each unmet via
-     `python3 docs/skills/triage-and-fix/bin/kwf-deps status <N>`
+     `python3 docs/skills/kskill-triage-and-fix/bin/kwf-deps status <N>`
 3. Tag `difficulty` (trivial|easy|medium|hard) and `size` (small|medium|large).
    `trivial` = sorcerer game only; when unsure → `easy`.
 4. Name `domain` from the prompt roster.

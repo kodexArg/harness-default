@@ -12,8 +12,8 @@ tags: [adr, harness, guardians, agents]
 
 ## CONTEXT
 
-> Two guardians watch the health of this harness's law: `guardian-prd`
-> guards the objective, `guardian-adr` guards the rules. This ADR is what
+> Two guardians watch the health of this harness's law: `kbot-prd`
+> guards the objective, `kbot-adr` guards the rules. This ADR is what
 > makes their verdicts binding.
 
 Rules only; what each guardian is — posture, watchlist, output shape — lives
@@ -22,7 +22,7 @@ to `adr-03` on 2026-08-02 so constitution and harness tooling own `01`/`02`.
 
 ## ASSERTIONS
 
-1. The two guardians — `guardian-prd` and `guardian-adr` — are the
+1. The two guardians — `kbot-prd` and `kbot-adr` — are the
    verification gate for their documents: [[PRD]] and the set of ADRs in
    force. One guardian per concern; adding a guardian appends a rule here.
 2. SSOT for guardian definitions is `docs/agents/`. A runtime that discovers
@@ -46,11 +46,11 @@ to `adr-03` on 2026-08-02 so constitution and harness tooling own `01`/`02`.
    bodies open only after that triage fails.
 8. Each guardian's watchlist has one machine copy: the `watch:` glob list in
    the frontmatter of its own definition, beside the prose that explains it.
-   The dispatch safety net (`docs/hooks/guardian-dispatch`) reads only that
+   The dispatch safety net (`docs/hooks/khook-guardian-dispatch`) reads only that
    key; a watched surface enters or leaves the watchlist by editing the
    guardian's file, nowhere else.
 9. **Fast dispatch payload.** The owner process runs
-   `docs/hooks/guardian-dispatch --bundle` (same batch selectors as the
+   `docs/hooks/khook-guardian-dispatch --bundle` (same batch selectors as the
    name-only form) and pastes that payload into each owed guardian's prompt:
    hit files, unified diff for those hits, and a live ADR `use_case` index.
    Guardians default to the **cheap** model tier (`model_preference: cheap`
@@ -71,10 +71,10 @@ to `adr-03` on 2026-08-02 so constitution and harness tooling own `01`/`02`.
 
 ### governed paths
 
-- `docs/agents/guardian-prd.md` — the PRD guardian
-- `docs/agents/guardian-adr.md` — the ADR guardian
-- `docs/hooks/guardian-dispatch` — the dispatch safety net (rules 3, 8, 9)
-- `docs/hooks/pre-commit` — the safety net's voice at commit time
+- `docs/agents/kbot-prd.md` — the PRD guardian
+- `docs/agents/kbot-adr.md` — the ADR guardian
+- `docs/hooks/khook-guardian-dispatch` — the dispatch safety net (rules 3, 8, 9)
+- `docs/hooks/khook-pre-commit` — the safety net's voice at commit time
 
 ### related files
 

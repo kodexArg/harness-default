@@ -6,7 +6,7 @@ updated: 2026-08-02
 
 This document is the working method the
 [[assertion-00-discipline|assertion family]] and the
-`assertion-review` skill share. When a law under `docs/assertions/` is
+`kskill-assertion-review` skill share. When a law under `docs/assertions/` is
 unmet, work proceeds here — not by coding first and hoping a test appears
 later.
 
@@ -44,7 +44,7 @@ not a proving test. If the only evidence is prose, the assertion is unmet.
 
 ## When the skill invokes this document
 
-The `assertion-review` skill loads this file whenever it finds an
+The `kskill-assertion-review` skill loads this file whenever it finds an
 assertion whose promise is not yet carried by runnable, linked tests — or
 whose tests no longer match the law after an edit. It does not invent a
 parallel process: it executes this one.

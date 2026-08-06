@@ -20,3 +20,8 @@ __pycache__/
 .venv/
 dist/
 *.log
+
+# Claude Code session scratch (per-session dedup state, locks)
+.claude/.nudge-seen-*
+.claude/*.lock
+.claude/.graph-index-marker

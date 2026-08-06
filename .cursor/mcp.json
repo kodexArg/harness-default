@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "markdown-vault-harness": {
+      "type": "stdio",
+      "command": "${userHome}/.local/bin/markdown-vault-mcp",
+      "args": ["serve"],
+      "env": {
+        "MARKDOWN_VAULT_MCP_SOURCE_DIR": "${workspaceFolder}/docs",
+        "MARKDOWN_VAULT_MCP_READ_ONLY": "false",
+        "MARKDOWN_VAULT_MCP_INDEX_PATH": "${workspaceFolder}/.mvmcp/data/index.db",
+        "MARKDOWN_VAULT_MCP_EMBEDDINGS_PATH": "${workspaceFolder}/.mvmcp/data/embeddings",
+        "MARKDOWN_VAULT_MCP_STATE_PATH": "${workspaceFolder}/.mvmcp/data/state.json",
+        "MARKDOWN_VAULT_MCP_EMBEDDING_PROVIDER": "fastembed",
+        "MARKDOWN_VAULT_MCP_FASTEMBED_MODEL": "BAAI/bge-small-en-v1.5",
+        "MARKDOWN_VAULT_MCP_EXCLUDE": "skills/**,hooks/**,agents/**"
+      }
+    }
+  }
+}
