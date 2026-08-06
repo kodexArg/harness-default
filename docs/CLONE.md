@@ -75,9 +75,18 @@ The law skills, always in force:
 - `docs/skills/kskill-triage-and-fix` — GitHub issue → PR party.
 
 The stack, docs, and orchestration skills ship too — inventory and grouping in
-[[HARNESS]]. **Delete what this project does not use**: a clone that never
-touches AWS should not carry ten AWS skills, and a Django-less clone should
-drop `kskill-django-6-drf`. Dead skills are noise in every discovery listing.
+[[HARNESS]]. Every one of them opens with a **ported-skill banner**: their
+bodies still cite the origin clone's ADRs and hardcode its cloud accounts,
+profiles, slugs and paths ([[adr-02-harness]] rule 5). Two jobs per skill you
+keep:
+
+1. **Remap** its citations to this project's own ADRs and its specifics to this
+   project's own values, then delete the banner.
+2. **Delete what this project does not use** — a clone that never touches AWS
+   should not carry ten AWS skills, and a Django-less clone should drop
+   `kskill-django-6-drf`. Dead skills are noise in every discovery listing.
+
+A kept skill still wearing its banner is unfinished, not configured.
 
 `kskill-reporte` keeps `references/` and `scripts/` as in-tree relative
 symlinks into `kskill-report/` (one copy of tokens, templates, validator). If

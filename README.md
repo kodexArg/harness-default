@@ -140,7 +140,10 @@ hooks, `kbot-*` agents, `kwf-*` the delivery cast
   - orchestration: `kskill-orchestrator`, `kskill-triage`,
     `kskill-wf-triage-and-fix`.
 
-  Delete what your project does not use — see [CLONE.md](docs/CLONE.md).
+  Every ported skill opens with a banner: its body still cites the origin
+  clone's ADRs and hardcodes its accounts and paths, none of it in force here
+  ([adr-02](docs/adrs/adr-02-harness.md) rule 5). Remap what you keep, delete
+  what you don't — see [CLONE.md](docs/CLONE.md).
 - **Agents** (`docs/agents/`) and **hooks** (`docs/hooks/`): governed by
   [adr-02](docs/adrs/adr-02-harness.md); guardians
   ([kbot-adr](docs/agents/kbot-adr.md),

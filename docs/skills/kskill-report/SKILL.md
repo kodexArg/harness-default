@@ -3,6 +3,15 @@ name: kskill-report
 description: "CONVERT a given markdown summary (prose, lists, code, ```mermaid blocks) into ONE self-contained, opinionated, mobile-first (and desktop-friendly) dark HTML artifact — meant to be sent over WhatsApp and opened on a phone. This skill CONVERTS markdown→HTML in a fixed format; it does NOT write, summarize, or research the content — the caller supplies the markdown, and if none is given the skill asks for it. Use when kodex asks for \"un resumen en html\", \"reporte html\", \"dame esto en html para el celular/WhatsApp\", a status report, concept explainer, comparison, stat highlight, or decision summary. Aesthetic is fixed (\"Presentation Orange\"): warm near-black, rationed orange glow, Nunito + DM Mono, Lucide icons, themed mermaid. Fast and deterministic — it fills templates, never improvises design."
 ---
 
+> [!warning] Ported skill — remap before trusting
+> This skill came from another clone of the harness, and its body still speaks
+> that clone's world: **law citations** (ADRs and docs that may not exist here —
+> only `adr-00`..`adr-04` do) and **origin specifics** (cloud accounts, profiles,
+> project slugs, template paths, naming schemes). None of it is in force or in
+> effect here ([[adr-01-constitution]]). On adoption, remap each citation to this
+> project's own ADR and each specific to this project's own values — or delete
+> the skill ([[adr-02-harness]] rules 3, 5, 6).
+
 # kskill-report
 
 Convert a **given** markdown summary (prose, lists, code, and `mermaid` blocks)

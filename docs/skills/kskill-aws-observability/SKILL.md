@@ -7,6 +7,15 @@ description: >
   by default, no X-Ray required, no ElastiCache metrics.
 ---
 
+> [!warning] Ported skill — remap before trusting
+> This skill came from another clone of the harness, and its body still speaks
+> that clone's world: **law citations** (ADRs and docs that may not exist here —
+> only `adr-00`..`adr-04` do) and **origin specifics** (cloud accounts, profiles,
+> project slugs, template paths, naming schemes). None of it is in force or in
+> effect here ([[adr-01-constitution]]). On adoption, remap each citation to this
+> project's own ADR and each specific to this project's own values — or delete
+> the skill ([[adr-02-harness]] rules 3, 5, 6).
+
 # kskill-aws-observability
 
 **Default stack is boring on purpose:** awslogs → CloudWatch Logs + ALB target health. That is enough for `desiredCount: 1` Fargate services. Do not install OpenTelemetry/Application Signals unless the user explicitly asks.
