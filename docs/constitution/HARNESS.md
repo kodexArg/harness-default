@@ -1,7 +1,7 @@
 ---
 title: Harness
 description: What this harness is, how its pieces fit together, and how to work inside it
-updated: 2026-08-02
+updated: 2026-08-06
 ---
 
 This harness is a template for fullstack projects. Everything the project
@@ -97,7 +97,7 @@ to check:
 Each assertion lives in its own file in `docs/assertions/`, states its rules
 first, and ends with a `## RELATED` open/close list. The `### Tests` chapter
 must link runnable tests that **demonstrate** the law (e.g. latency ≤ 500ms
-→ a test that fails above that bound). The `assertion-review` skill
+→ a test that fails above that bound). The `kskill-assertion-review` skill
 interprets the paragraph, demands those tests via [[TDD]], drives the fix or
 feature, and stamps `verified` only when the tests pass.
 
@@ -154,40 +154,82 @@ readme — their description lives here and in the docs tier.
 ## Issue delivery — triage-and-fix
 
 This harness owns the **law** and the **delivery cast**. Taking one GitHub
-issue to a PR is the in-tree party: skill `docs/skills/triage-and-fix/`,
+issue to a PR is the in-tree party: skill `docs/skills/kskill-triage-and-fix/`,
 cast `docs/agents/kwf-*.md`. Binding rules: [[adr-04-issue-delivery]].
 Operator steps: [[CLONE]]. Runtime spawn map (Kimi / Claude / Cursor-Grok):
-`docs/skills/triage-and-fix/references/runtimes.md`.
+`docs/skills/kskill-triage-and-fix/references/runtimes.md`.
 
 Phases: forest → tavern → camp → stalking → plaza → post-bard. After plaza,
 the owner process runs `guardian-dispatch --bundle`, pastes that payload
 into each owed guardian ([[adr-03-guardians]] rule 9), dispatches them in
-parallel on the cheap tier, and runs `assertion-review` when assertions
+parallel on the cheap tier, and runs `kskill-assertion-review` when assertions
 were touched. Important features enter as assertion laws ([[TDD]]), not as
 silent code.
 
 ## Agent tooling
 
+Every artifact is prefixed by what it is — `kskill-*` skills, `khook-*` hooks,
+`kbot-*` agents, `kwf-*` the delivery party ([[adr-02-harness]] rule 8). The
+prefix is how a name read cold says which tree owns it and which contract
+applies.
+
 - **`docs/skills/`** — skills agnostic to the LLM but useful for this
   project: self-contained instruction packages an agent loads on demand.
-  Residents: `assertion-review` (laws → tests → code via [[TDD]]) and
-  `triage-and-fix` (issue → PR party). Wire each into the runtime's skill
-  discovery (symlink or reference).
+  Wire each into the runtime's skill discovery (symlink or reference).
+  - **law skills** — `kskill-assertion-review` (laws → tests → code via
+    [[TDD]]) and `kskill-triage-and-fix` (issue → PR party). These two are the
+    standing residents; the law is their subject.
+  - **stack skills** — `kskill-astro-7` (Astro 7 + Svelte islands),
+    `kskill-django-6-drf` (Django 6 + DRF), and the AWS set
+    (`kskill-aws-s3`, `-iam`, `-containers`, `-cost`, `-observability`,
+    `-cloudwatch-query`, `-cloudwatch-alarms`, `-secrets-manager`,
+    `-secrets-create`, `-troubleshoot`).
+  - **docs skills** — `kskill-live-doc` (code ↔ doc linker),
+    `kskill-markdown-vault` (query the `docs/` vault graph),
+    `kskill-obsidian-markdown` (vault-flavored markdown),
+    `kskill-report` / `kskill-reporte` (one self-contained dark HTML report,
+    English and Spanish twins; they save to disk and report the path —
+    this harness ships no send channel).
+  - **orchestration skills** — `kskill-orchestrator` (main chat as team lead
+    over `kbot-*` workers), `kskill-triage` (cheap go/no-go before spending
+    tokens), `kskill-wf-triage-and-fix` (the same delivery party driven by the
+    Workflow tool instead of by hand). These serve
+    [[adr-04-issue-delivery]] — they do not outrank it, and where a mechanic
+    differs the ADR is right and the skill is the defect.
 - **`docs/hooks/`** — LLM-agnostic automation attached to agent or tooling
   lifecycle events. The first resident is the dispatch safety net
-  ([[adr-03-guardians]] rules 3, 8, 9): `guardian-dispatch` maps a batch's
+  ([[adr-03-guardians]] rules 3, 8, 9): `khook-guardian-dispatch` maps a batch's
   changed files against the `watch:` globs each agent declares in its own
   frontmatter and names the guardians owed; `--bundle` adds hit paths, diff,
   and a live ADR `use_case` index for the owner to paste into each guardian
-  prompt. `pre-commit` speaks the name-only form at every commit — wired
+  prompt. `khook-pre-commit` speaks the name-only form at every commit — wired
   once per clone with
-  `ln -s ../../docs/hooks/pre-commit .git/hooks/pre-commit`. It warns rather
+  `ln -s ../../docs/hooks/khook-pre-commit .git/hooks/pre-commit`. It warns rather
   than blocks: the duty it voices binds the agent that reads it. The same
   script is the post-bard entry for [[adr-04-issue-delivery]].
-- **`docs/agents/`** — agent role definitions. Guardians (`guardian-prd`,
-  `guardian-adr`) gate the PRD and ADR set ([[adr-03-guardians]]); both
+
+  The Claude-native lifecycle hooks, wired in `.claude/settings.json`:
+
+  | Hook | Event | Duty |
+  |---|---|---|
+  | `khook-load-ssot.py` | SessionStart | injects [[PRD]] and [[API]] so the standing requirement is met deterministically |
+  | `khook-require-api-read.py` | UserPromptSubmit | a prompt touching the route surface must re-read [[API]] first |
+  | `khook-require-pr-flow.py` | PreToolUse (Bash) | issue → PR reminder on commit / push to main ([[adr-04-issue-delivery]]) |
+  | `khook-check-adr.py` | PostToolUse (Write\|Edit) | every ADR written matches the [[adr-00-discipline]] shape |
+  | `khook-check-api.py` | PostToolUse (Write\|Edit) | no route in `urls.py` without its [[API]] row |
+  | `khook-dispatch-guardians.py` | PostToolUse (Write\|Edit) | Claude-native voice of the dispatch safety net; delegates the watchlist to `khook-guardian-dispatch` |
+
+  Its ADR-review nudge table ships **empty** on purpose: a nudge may only name
+  ADRs this clone actually has ([[adr-02-harness]] rule 6). Each project fills
+  it in as it writes its own ADRs.
+- **`docs/agents/`** — agent role definitions. Guardians (`kbot-prd`,
+  `kbot-adr`) gate the PRD and ADR set ([[adr-03-guardians]]); both
   declare `model_preference: cheap` and triage before opening law bodies.
   The `kwf-*` cast (18 nodes) runs issue delivery ([[adr-04-issue-delivery]]).
+  The rest of the `kbot-*` roster are the orchestration workers
+  `kskill-orchestrator` dispatches: `kbot-planner`, `kbot-builder`,
+  `kbot-auditor`, `kbot-critic`, `kbot-low` / `-medium` / `-high`,
+  `kbot-janitor`, `kbot-changelog`, `kbot-document-this`, `kbot-evaluate`.
   `.claude/agents/` at the root is the Claude Code link to this folder —
   one real copy, links everywhere else; Kimi uses `extra_agent_dirs`;
   Cursor/Grok injects the files per `runtimes.md`.

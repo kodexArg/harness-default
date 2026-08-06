@@ -1,7 +1,7 @@
 ---
 title: harness-default
 description: Scaffolding for fullstack projects — constitution, ADRs as rules, assertions as the entry path for solutions, and in-tree triage-and-fix delivery
-updated: 2026-08-02
+updated: 2026-08-06
 ---
 
 # harness-default
@@ -52,7 +52,7 @@ promise with no proving test is not an assertion; it is a wish.
 Assertions are how solutions enter the project and stay:
 
 1. The owner writes a law under `docs/assertions/`.
-2. The [assertion-review](docs/skills/assertion-review/SKILL.md) skill
+2. The [assertion-review](docs/skills/kskill-assertion-review/SKILL.md) skill
    interprets what the law means (LLM judgment), checks that `RELATED` links
    resolve, and **demands tests** following [TDD.md](docs/TDD.md).
 3. Those tests prepare the fix or feature that satisfies the law — and they
@@ -76,12 +76,12 @@ Step-by-step: [CLONE.md](docs/CLONE.md).
 ### Issue delivery (triage-and-fix)
 
 GitHub issue → PR ships **in this template**: skill
-[triage-and-fix](docs/skills/triage-and-fix/SKILL.md), cast
+[triage-and-fix](docs/skills/kskill-triage-and-fix/SKILL.md), cast
 `docs/agents/kwf-*.md`, binding [adr-04](docs/adrs/adr-04-issue-delivery.md).
 Phases: forest → tavern → camp → stalking → plaza → post-bard
-(`guardian-dispatch` + `assertion-review`). Runtime adapters (Kimi, Claude,
+(`khook-guardian-dispatch` + `kskill-assertion-review`). Runtime adapters (Kimi, Claude,
 Cursor/Grok):
-[runtimes.md](docs/skills/triage-and-fix/references/runtimes.md).
+[runtimes.md](docs/skills/kskill-triage-and-fix/references/runtimes.md).
 Assertions remain the entry path for important features — TDD first.
 
 ### ADRs are the rules
@@ -125,19 +125,33 @@ keeps — the pick is about folders, the knowledge stays.
 
 ### Agent tooling
 
-- **Skills** (`docs/skills/`) are instruction packages. Wire each into your
-  agent's skill discovery. Residents:
-  [assertion-review](docs/skills/assertion-review/SKILL.md) (laws → tests →
-  code via [TDD.md](docs/TDD.md)) and
-  [triage-and-fix](docs/skills/triage-and-fix/SKILL.md) (issue → PR).
+Every artifact carries its kind in its name — `kskill-*` skills, `khook-*`
+hooks, `kbot-*` agents, `kwf-*` the delivery cast
+([adr-02](docs/adrs/adr-02-harness.md) rule 8).
+
+- **Skills** (`docs/skills/`) are instruction packages. Claude Code sees them
+  via `.claude/skills`; wire other runtimes into their own discovery.
+  - law: [kskill-assertion-review](docs/skills/kskill-assertion-review/SKILL.md)
+    (laws → tests → code via [TDD.md](docs/TDD.md)) and
+    [kskill-triage-and-fix](docs/skills/kskill-triage-and-fix/SKILL.md) (issue → PR).
+  - stack: `kskill-astro-7`, `kskill-django-6-drf`, and ten `kskill-aws-*`.
+  - docs: `kskill-live-doc`, `kskill-markdown-vault`,
+    `kskill-obsidian-markdown`, `kskill-report` / `kskill-reporte`.
+  - orchestration: `kskill-orchestrator`, `kskill-triage`,
+    `kskill-wf-triage-and-fix`.
+
+  Delete what your project does not use — see [CLONE.md](docs/CLONE.md).
 - **Agents** (`docs/agents/`) and **hooks** (`docs/hooks/`): governed by
   [adr-02](docs/adrs/adr-02-harness.md); guardians
-  ([guardian-adr](docs/agents/guardian-adr.md),
-  [guardian-prd](docs/agents/guardian-prd.md)) per
+  ([kbot-adr](docs/agents/kbot-adr.md),
+  [kbot-prd](docs/agents/kbot-prd.md)) per
   [adr-03](docs/adrs/adr-03-guardians.md); the `kwf-*` delivery cast per
-  [adr-04](docs/adrs/adr-04-issue-delivery.md);
-  [guardian-dispatch](docs/hooks/guardian-dispatch) /
-  [pre-commit](docs/hooks/pre-commit) as the safety net.
+  [adr-04](docs/adrs/adr-04-issue-delivery.md); the rest of the `kbot-*`
+  roster are orchestration workers.
+  [khook-guardian-dispatch](docs/hooks/khook-guardian-dispatch) /
+  [khook-pre-commit](docs/hooks/khook-pre-commit) are the safety net; the
+  Claude-native `khook-*.py` lifecycle hooks are wired in
+  `.claude/settings.json`.
 
 ## Structure
 
@@ -147,7 +161,7 @@ keeps — the pick is about folders, the knowledge stays.
 | `docs/` | Loose documents that iterate with the code: glossary, use cases, user stories, TDD, architecture, stack docs, API. |
 | `docs/adrs/` | Architecture Decision Records — [adr-00](docs/adrs/adr-00-discipline.md), [adr-01](docs/adrs/adr-01-constitution.md), [adr-02](docs/adrs/adr-02-harness.md), … |
 | `docs/assertions/` | Owner-reserved laws; entry path for solutions via tests — [assertion-00](docs/assertions/assertion-00-discipline.md). |
-| `docs/skills/`, `docs/hooks/`, `docs/agents/` | Agent tooling — assertion-review, triage-and-fix, guardians, `kwf-*` cast, dispatch safety net. |
+| `docs/skills/`, `docs/hooks/`, `docs/agents/` | Agent tooling — `kskill-*` skills (law, stack, docs, orchestration), `khook-*` hooks, `kbot-*` agents, `kwf-*` delivery cast. |
 | [CLONE.md](docs/CLONE.md) | First-run checklist (code roots, hooks, vault, delivery). |
 | `frontend/` + `backend/` | Code roots, the specific pair — classic fullstack webapp. |
 | `interfaces/` + `services/` | Code roots, the generalistic pair — many services, many interfaces. |

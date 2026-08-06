@@ -23,27 +23,27 @@ tooling own `01`/`02`.
 ## ASSERTIONS
 
 1. GitHub issue delivery ships **in this repository**: skill
-   `docs/skills/triage-and-fix/`, cast `docs/agents/kwf-*.md`, deps CLI
-   `docs/skills/triage-and-fix/bin/kwf-deps`. That tree is the SSOT — not a
+   `docs/skills/kskill-triage-and-fix/`, cast `docs/agents/kwf-*.md`, deps CLI
+   `docs/skills/kskill-triage-and-fix/bin/kwf-deps`. That tree is the SSOT — not a
    sibling checkout.
 2. **Include, adapt by runtime.** The playbook and YAML contracts are
    runtime-agnostic. Model pins and spawn mechanics live in
-   `docs/skills/triage-and-fix/references/runtimes.md` (Kimi, Claude Code,
+   `docs/skills/kskill-triage-and-fix/references/runtimes.md` (Kimi, Claude Code,
    Cursor/Grok). A runtime may lack a native `kwf-*` registry; it still runs
    the same phases by injecting the agent files as prompts.
 3. Doctrine-first planning is binding: PRD and ADRs in force before a plan;
    inquisitor before camp. That duty does not replace [[adr-03-guardians]] —
    guardians still gate law changes after publish.
 4. After plaza / bard publishes, the **owner process** closes the batch: run
-   `docs/hooks/guardian-dispatch --bundle` against the delivered change set;
+   `docs/hooks/khook-guardian-dispatch --bundle` against the delivered change set;
    paste the payload and dispatch
    every guardian owed; honor `violation` / `danger` / `needs-new-adr` per
    [[adr-03-guardians]].
 5. When a plan slice or delivered diff touches `docs/assertions/` or claims
    to satisfy an assertion law, builders follow [[TDD]] and the
-   `assertion-review` skill: proving tests first, linked under `### Tests`,
+   `kskill-assertion-review` skill: proving tests first, linked under `### Tests`,
    then the code. The inquisitor treats "touches assertions without a TDD
-   step" as a plan `violation`. The owner process runs `assertion-review`
+   step" as a plan `violation`. The owner process runs `kskill-assertion-review`
    on those assertions before the batch closes.
 6. Unmet assertion laws do not block unrelated issues. They block (or
    redirect into TDD) only work that claims those laws or edits their
@@ -60,7 +60,7 @@ tooling own `01`/`02`.
 - **NEVER** keep a second SSOT for the cast outside this tree (rule 1). A
   historical sibling may mirror or point here; it must not diverge as a
   competing source of truth.
-- **NEVER** treat a bard PR as batch-closed when `guardian-dispatch` named
+- **NEVER** treat a bard PR as batch-closed when `khook-guardian-dispatch` named
   a guardian that was not run (rule 4).
 - **NEVER** mark an assertion `verified` from a party run without proving
   tests per [[TDD]] (rule 5).
@@ -75,7 +75,7 @@ tooling own `01`/`02`.
 - **Vendoring as Kimi-only blobs with no runtime map** — copy agents without
   documenting Claude/Cursor-Grok dispatch. Rejected because the playbook's
   value is the phase contracts, not one CLI's `Agent` tool.
-- **Name-only post-bard guardian close** — run `guardian-dispatch` without
+- **Name-only post-bard guardian close** — run `khook-guardian-dispatch` without
   `--bundle` and let each guardian rediscover the batch. Rejected 2026-08-03
   in favor of [[adr-03-guardians]] rule 9. Reopen only with that ADR.
 
@@ -83,10 +83,10 @@ tooling own `01`/`02`.
 
 ### governed paths
 
-- `docs/skills/triage-and-fix/` — playbook, deps, runtime map
+- `docs/skills/kskill-triage-and-fix/` — playbook, deps, runtime map
 - `docs/agents/kwf-*.md` — cast (with guardians)
-- `docs/hooks/guardian-dispatch` — post-bard safety net entry
-- `docs/skills/assertion-review/` — assertion close-out
+- `docs/hooks/khook-guardian-dispatch` — post-bard safety net entry
+- `docs/skills/kskill-assertion-review/` — assertion close-out
 - `docs/CLONE.md` — clone checklist including delivery wiring
 
 ### related files

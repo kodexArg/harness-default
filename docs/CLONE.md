@@ -1,7 +1,7 @@
 ---
 title: Clone
-description: First-run checklist after cloning harness-default — code roots, hooks, vault, skills, triage-and-fix
-updated: 2026-08-02
+description: First-run checklist after cloning harness-default — code roots, hooks, vault, skills, issue delivery
+updated: 2026-08-06
 ---
 
 Operator steps for a new project from this template. Order matters where
@@ -21,11 +21,21 @@ Leave `state/`. Keep all four stack documents under `docs/`.
 ## 2. Wire the guardian safety net
 
 ```bash
-ln -s ../../docs/hooks/pre-commit .git/hooks/pre-commit
+ln -s ../../docs/hooks/khook-pre-commit .git/hooks/pre-commit
 ```
 
 Warns at commit when guardians are owed ([[adr-03-guardians]]). Does not
 block; the owner process still must dispatch.
+
+Claude Code's lifecycle hooks ship wired in `.claude/settings.json` (table in
+[[HARNESS]]); `.claude/hooks -> ../docs/hooks`, so there is no second copy.
+Two things a clone must do itself:
+
+- Fill the ADR-review nudge table in `docs/hooks/khook-dispatch-guardians.py`
+  as the project writes its own ADRs — it ships empty because a nudge may only
+  name ADRs that exist here ([[adr-02-harness]] rule 6).
+- Declare endpoints in [[API]] before writing routes: `khook-check-api.py`
+  blocks a `urls.py` route with no row.
 
 Link guardians (and the `kwf-*` cast) into the runtime that will use them —
 one real copy under `docs/agents/`:
@@ -36,7 +46,7 @@ one real copy under `docs/agents/`:
 
 # Kimi: extra_agent_dirs includes <clone>/docs/agents
 # Cursor/Grok: no registry — playbook injects docs/agents/kwf-*.md via Task
-#   (see docs/skills/triage-and-fix/references/runtimes.md)
+#   (see docs/skills/kskill-triage-and-fix/references/runtimes.md)
 ```
 
 ## 3. Vault (recommended)
@@ -55,10 +65,23 @@ Config ships in `.mcp.json`. Reindex after large doc batches.
 
 ## 5. Skills
 
-Wire both skills into the runtime's skill discovery (symlink or reference):
+Claude Code sees the whole tree already (`.claude/skills -> ../docs/skills`).
+Other runtimes: point their skill discovery at `docs/skills/` — one real copy,
+links everywhere else.
 
-- `docs/skills/assertion-review` — laws → tests → code ([[TDD]]).
-- `docs/skills/triage-and-fix` — GitHub issue → PR party.
+The law skills, always in force:
+
+- `docs/skills/kskill-assertion-review` — laws → tests → code ([[TDD]]).
+- `docs/skills/kskill-triage-and-fix` — GitHub issue → PR party.
+
+The stack, docs, and orchestration skills ship too — inventory and grouping in
+[[HARNESS]]. **Delete what this project does not use**: a clone that never
+touches AWS should not carry ten AWS skills, and a Django-less clone should
+drop `kskill-django-6-drf`. Dead skills are noise in every discovery listing.
+
+`kskill-reporte` keeps `references/` and `scripts/` as in-tree relative
+symlinks into `kskill-report/` (one copy of tokens, templates, validator). If
+you delete the English twin, delete the Spanish one with it.
 
 Do **not** add product assertions until the owner reserves compute for a law
 ([[assertion-00-discipline]]).
@@ -69,13 +92,13 @@ Cast and skill already ship in this clone ([[adr-04-issue-delivery]]):
 
 1. Confirm the runtime can see `docs/agents/kwf-*.md` (Claude symlink, Kimi
    `extra_agent_dirs`, or Cursor/Grok prompt injection per `runtimes.md`).
-2. Confirm skill `triage-and-fix` is on the runtime skill path.
-3. Optional: vendor `docs/skills/triage-and-fix/extras/gha-kwf-deps.yml` into
+2. Confirm skill `kskill-triage-and-fix` is on the runtime skill path.
+3. Optional: vendor `docs/skills/kskill-triage-and-fix/extras/gha-kwf-deps.yml` into
    `.github/workflows/` for human-side defer cascades.
 4. After every plaza/bard publish, the owner process runs
-   `docs/hooks/guardian-dispatch --bundle`, pastes the payload into each
+   `docs/hooks/khook-guardian-dispatch --bundle`, pastes the payload into each
    owed guardian (cheap tier, parallel), and runs
-   `assertion-review` if `docs/assertions/` was touched.
+   `kskill-assertion-review` if `docs/assertions/` was touched.
 
 ## Done when
 

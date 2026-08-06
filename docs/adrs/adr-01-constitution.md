@@ -46,7 +46,7 @@ shape lives in [[CONVENTION]] and the family `-00` disciplines.
    applies only to constitution vs loose `docs/` documents.
 6. **Assertions are laws.** Owner-reserved, kept few, optional as a set.
    Every assertion that exists must be met via proving tests ([[TDD]],
-   `assertion-review`). They are the entry path for important features.
+   `kskill-assertion-review`). They are the entry path for important features.
    When an assertion and the constitution disagree, the assertion is wrong
    ([[assertion-00-discipline]]).
 7. **Knowledge under `docs/`.** Everything the project *knows* lives under

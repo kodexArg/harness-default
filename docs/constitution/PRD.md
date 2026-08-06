@@ -26,7 +26,7 @@ user stories here; this harness keeps behavior with its owners:
 
 - **`docs/assertions/`** — the laws. Owner-reserved, kept few; every
   assertion that exists is binding and proven by linked tests through
-  [[TDD]] and `assertion-review`. None existing is healthy
+  [[TDD]] and `kskill-assertion-review`. None existing is healthy
   ([[assertion-00-discipline]]).
 - **[[USE-CASES]]** — the behavior, in Gherkin, an open/close list.
 - **[[USER-STORIES]]** — who wants what and why, accepted through their
@@ -41,4 +41,4 @@ written.
 > Filling the brackets is among the first acts of a cloned project, together
 > with picking the code-root pair ([[HARNESS]]); the brackets and this note
 > leave together. `What it must do` stays as written. The keeper of this
-> document is the PRD guardian, `docs/agents/guardian-prd.md`.
+> document is the PRD guardian, `docs/agents/kbot-prd.md`.
