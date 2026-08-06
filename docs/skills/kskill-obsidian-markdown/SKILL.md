@@ -3,6 +3,15 @@ name: kskill-obsidian-markdown
 description: Create and edit Obsidian Flavored Markdown with wikilinks, embeds, callouts, properties, and other Obsidian-specific syntax. Use when working with .md files in Obsidian, or when the user mentions wikilinks, callouts, frontmatter, tags, embeds, or Obsidian notes.
 ---
 
+> [!warning] Ported skill — remap before trusting
+> This skill came from another clone of the harness, and its body still speaks
+> that clone's world: **law citations** (ADRs and docs that may not exist here —
+> only `adr-00`..`adr-04` do) and **origin specifics** (cloud accounts, profiles,
+> project slugs, template paths, naming schemes). None of it is in force or in
+> effect here ([[adr-01-constitution]]). On adoption, remap each citation to this
+> project's own ADR and each specific to this project's own values — or delete
+> the skill ([[adr-02-harness]] rules 3, 5, 6).
+
 # Obsidian Flavored Markdown Skill
 
 Create and edit valid Obsidian Flavored Markdown. Obsidian extends CommonMark and GFM with wikilinks, embeds, callouts, properties, comments, and other syntax. This skill covers only Obsidian-specific extensions -- standard Markdown (headings, bold, italic, lists, quotes, code blocks, tables) is assumed knowledge.

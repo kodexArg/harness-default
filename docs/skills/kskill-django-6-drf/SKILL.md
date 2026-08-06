@@ -21,6 +21,15 @@ metadata:
   pins_ssot: "docs/REQUIREMENTS.md"
 ---
 
+> [!warning] Ported skill — remap before trusting
+> This skill came from another clone of the harness, and its body still speaks
+> that clone's world: **law citations** (ADRs and docs that may not exist here —
+> only `adr-00`..`adr-04` do) and **origin specifics** (cloud accounts, profiles,
+> project slugs, template paths, naming schemes). None of it is in force or in
+> effect here ([[adr-01-constitution]]). On adoption, remap each citation to this
+> project's own ADR and each specific to this project's own values — or delete
+> the skill ([[adr-02-harness]] rules 3, 5, 6).
+
 # kskill-django-6-drf
 
 **Swiss-army Django API skill.** Trigger on `kskill-django-6-drf` or any Django/DRF backend work for kodex projects. Always assume this stack; do not invent alternatives.

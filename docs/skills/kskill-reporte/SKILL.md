@@ -3,6 +3,15 @@ name: kskill-reporte
 description: SOLO ESPAÑOL. Construye UN reporte HTML oscuro, mobile-first y autocontenido (Presentation Orange) a partir del cierre de un trabajo, del último mensaje del asistente, o de instrucciones explícitas del usuario — valida mermaid y guarda en ~/Documents/kskill-reporte/. Primero enruta la intención (resumen de job · brief del último mensaje · brief explícito). Traduce TODO el input al español y escribe el reporte + la respuesta de chat en español. Usar cuando kodex corre /kskill-reporte o pide un reporte HTML en español / para el celular / WhatsApp en español. El gemelo en inglés es /kskill-report. Estética fija: near-black cálido, naranja racionado, Nunito + DM Mono, Lucide, mermaid temático. Nunca improvisar diseño.
 ---
 
+> [!warning] Ported skill — remap before trusting
+> This skill came from another clone of the harness, and its body still speaks
+> that clone's world: **law citations** (ADRs and docs that may not exist here —
+> only `adr-00`..`adr-04` do) and **origin specifics** (cloud accounts, profiles,
+> project slugs, template paths, naming schemes). None of it is in force or in
+> effect here ([[adr-01-constitution]]). On adoption, remap each citation to this
+> project's own ADR and each specific to this project's own values — or delete
+> the skill ([[adr-02-harness]] rules 3, 5, 6).
+
 # kskill-reporte (Español)
 
 **SSOT path:** `docs/skills/kskill-reporte/`  

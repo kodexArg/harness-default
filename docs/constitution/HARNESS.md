@@ -179,6 +179,11 @@ applies.
   - **law skills** — `kskill-assertion-review` (laws → tests → code via
     [[TDD]]) and `kskill-triage-and-fix` (issue → PR party). These two are the
     standing residents; the law is their subject.
+  Every skill below the two law skills was **ported from another clone** and
+  wears a banner saying so: its citations and its hardcoded specifics (cloud
+  accounts, profiles, slugs, template paths) belong to the origin project and
+  bind nothing here until remapped ([[adr-02-harness]] rule 5).
+
   - **stack skills** — `kskill-astro-7` (Astro 7 + Svelte islands),
     `kskill-django-6-drf` (Django 6 + DRF), and the AWS set
     (`kskill-aws-s3`, `-iam`, `-containers`, `-cost`, `-observability`,

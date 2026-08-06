@@ -45,10 +45,14 @@ and delivery themes have their own ADRs.
    `kskill-assertion-review` (laws → tests → code) and `kskill-triage-and-fix` (issue →
    PR). Delivery mechanics: [[adr-04-issue-delivery]]. Everything else under
    `docs/skills/` is a **stack or utility skill** — it serves the law like any
-   other tool and carries no authority of its own. A skill ported from another
-   clone carries that clone's law citations: it says so in a banner at the top
-   until each citation is remapped to an ADR that exists here or deleted (rule
-   6 — the same prohibition, at body level).
+   other tool and carries no authority of its own. **Every** skill ported from
+   another clone declares that in a banner at the top — no exceptions, no
+   judging which ones "look generic enough". The banner covers both what the
+   body cites (ADRs and docs that may not exist here — the same prohibition
+   rule 6 puts on hooks) and what it hardcodes (cloud accounts, profiles,
+   project slugs, template paths, naming schemes). Neither is in force or in
+   effect on adoption. The banner comes off when the body is remapped to this
+   project, or the skill goes.
 6. **Hooks are automation.** Hooks are LLM-agnostic scripts attached to
    agent or git lifecycle events. The dispatch safety net
    (`docs/hooks/khook-guardian-dispatch`, voiced by `docs/hooks/khook-pre-commit`)
@@ -88,6 +92,30 @@ and delivery themes have their own ADRs.
 - **NEVER** name a harness artifact after the stack or the project it happens
   to serve, and never ship an artifact without its kind prefix (rule 8).
 - **NEVER** cite an ADR a hook or agent cannot resolve in this clone (rule 6).
+- **NEVER** ship a ported skill without its banner, however generic the body
+  looks: the reader cannot tell an origin specific from a local one, and an
+  unmarked account name or template path fossilizes on adoption (rule 5).
+
+## REJECTED
+
+- **Banner only the ported skills that cite a missing ADR** — rule 5's first
+  policy, held for one batch. It read the defect as a citation problem, so the
+  banner triggered on law citations and seven of twenty ported skills got one.
+  It lost because the remaining thirteen carried origin specifics instead of
+  citations — another project's cloud account, AWS profile, media-bucket
+  naming, template paths — and nothing marked them, while [[CLONE]] and the
+  README invited cloners to keep or delete these skills as if they were
+  generic. A reader cannot tell an origin specific from a local one, so the
+  split was invisible exactly where it mattered. Replaced by the current rule
+  5, which triggers on being ported. Reopens only if the ported tree is ever
+  genericized wholesale, leaving nothing origin-bound for a banner to warn
+  about.
+- **Deleting the inherited citations outright** — considered when the same
+  defect first surfaced, and not taken. A citation to another project's ADR
+  still tells the reader *what kind* of rule governs the surface, which is the
+  part worth carrying into a new project; deleting it destroys that and leaves
+  the skill silently ungoverned. Marking beats erasing while the body is still
+  origin-shaped.
 
 ## RELATED
 

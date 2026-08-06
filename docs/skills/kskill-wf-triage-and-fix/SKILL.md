@@ -3,6 +3,15 @@ name: kskill-wf-triage-and-fix
 description: "The triage-and-fix Workflow — takes one GitHub issue end to end (forest, tavern, camp, stalking, plaza: scout, triage, route, plan, build backend+frontend, secret-scan gate, blind review, publish) via a deterministic JavaScript Workflow script driving a cast of purpose-built agents with exact tool grants. Use when kodex says \"triage-and-fix\", \"the party\", \"la taberna\", \"el campamento\", \"el cazador\", names a node (hunter, falcon, hound, tavernkeeper, mage, warrior, archer, priest, owl, cat, mouse, shadow, bard), asks to run an issue through the workflow, or wants to edit the cast, the scenes, or the script."
 ---
 
+> [!warning] Ported skill — remap before trusting
+> This skill came from another clone of the harness, and its body still speaks
+> that clone's world: **law citations** (ADRs and docs that may not exist here —
+> only `adr-00`..`adr-04` do) and **origin specifics** (cloud accounts, profiles,
+> project slugs, template paths, naming schemes). None of it is in force or in
+> effect here ([[adr-01-constitution]]). On adoption, remap each citation to this
+> project's own ADR and each specific to this project's own values — or delete
+> the skill ([[adr-02-harness]] rules 3, 5, 6).
+
 # kskill-kskill-wf-triage-and-fix
 
 One issue in; a pull request, a comment on that issue, or a new issue out. Everything

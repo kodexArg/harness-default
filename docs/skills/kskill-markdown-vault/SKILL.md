@@ -3,14 +3,14 @@ name: kskill-markdown-vault
 description: Drive the markdown-vault-docs MCP — the first source of truth for docs/ content in the astro-drf-aws template. Use for any question about docs/ prose or its wikilink graph (search, read, backlinks, similarity), before Grep/Read. Also covers bootstrap, reindex, and the write caveat. Ruled by adr-20-markdown-vault-mcp; full config in docs/markdown-vault-mcp.md.
 ---
 
-> [!warning] Inherited law — remap before trusting
-> This skill was ported from another clone of the harness. Where its body cites
-> an ADR or a document, that citation names the **origin project's** law, not
-> this one: only `adr-00`..`adr-04` exist here, and referenced docs may not.
-> Those citations are placeholders — nothing outside `docs/adrs/` in this clone
-> is in force ([[adr-01-constitution]]). On adoption, remap each one to this
-> project's own ADR or delete it; do not treat a dangling wikilink as a rule
-> ([[adr-02-harness]] rules 3 and 6).
+> [!warning] Ported skill — remap before trusting
+> This skill came from another clone of the harness, and its body still speaks
+> that clone's world: **law citations** (ADRs and docs that may not exist here —
+> only `adr-00`..`adr-04` do) and **origin specifics** (cloud accounts, profiles,
+> project slugs, template paths, naming schemes). None of it is in force or in
+> effect here ([[adr-01-constitution]]). On adoption, remap each citation to this
+> project's own ADR and each specific to this project's own values — or delete
+> the skill ([[adr-02-harness]] rules 3, 5, 6).
 
 # kskill-markdown-vault — query the docs/ vault graph
 

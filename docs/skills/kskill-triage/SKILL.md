@@ -3,6 +3,15 @@ name: kskill-triage
 description: Cheap, fast triage of an idea or proposed change BEFORE committing real tokens. Restates the idea in English, scouts read-only with parallel haiku workers (kbot-low), and returns a fixed Spanish verdict card — one paragraph, affected skills, and a 1-3 matrix (Severidad / Colateral / Esfuerzo) drawn with ●○ icons. Use when kodex says "triage", "triagealo", "evaluá esta idea", "qué tan grave / riesgoso / caro es", "vale la pena?", or pitches a change and wants a quick go/no-go read instead of an implementation.
 ---
 
+> [!warning] Ported skill — remap before trusting
+> This skill came from another clone of the harness, and its body still speaks
+> that clone's world: **law citations** (ADRs and docs that may not exist here —
+> only `adr-00`..`adr-04` do) and **origin specifics** (cloud accounts, profiles,
+> project slugs, template paths, naming schemes). None of it is in force or in
+> effect here ([[adr-01-constitution]]). On adoption, remap each citation to this
+> project's own ADR and each specific to this project's own values — or delete
+> the skill ([[adr-02-harness]] rules 3, 5, 6).
+
 # kskill-triage
 
 Mini-orchestrator that turns a raw idea into a one-glance verdict card.
