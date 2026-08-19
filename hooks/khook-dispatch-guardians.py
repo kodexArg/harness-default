@@ -28,8 +28,11 @@ import importlib.machinery
 import importlib.util
 import json
 import os
+import re
+import subprocess
 import sys
 from pathlib import Path
+
 
 
 def _load_guardian_dispatch(root):
@@ -113,16 +116,18 @@ def _matches_watchlist_entry(rel, pattern):
     return False
 
 
-def guardians_for(rel, root):
-    """Reads the live watch: lists from agents/*.md via the agnostic
-    guardian-dispatch script — the single source (adr-03-guardians rule 8).
-    Returns [] if the script cannot be loaded (fail-open, never blocks)."""
+def guardians_for(rel: str, root: Path) -> list[str]:
+    """Reads the live watchlists via the agnostic guardian-dispatch script.
+    Filters to guardian roles (kbot-prd, kbot-adr, etc.)."""
     module = _load_guardian_dispatch(root)
     if module is None:
         return []
-    lists = module.watchlists(root / "agents")
+    lists = module.watchlists(root)
     hits = []
     for agent, patterns in lists.items():
+        # Only guardian agents gate document/ADR health
+        if not agent.startswith("kbot-"):
+            continue
         for pattern in patterns:
             if _matches_watchlist_entry(rel, pattern):
                 hits.append(agent)
@@ -130,8 +135,7 @@ def guardians_for(rel, root):
     return hits
 
 
-
-def matches_for(rel, tool_name):
+def matches_for(rel: str, tool_name: str) -> list[tuple[int, str]]:
     hits = []
     for index, (patterns, required_tool, text) in enumerate(RULES):
         if required_tool is not None and tool_name != required_tool:
@@ -141,12 +145,15 @@ def matches_for(rel, tool_name):
     return hits
 
 
-def session_id(payload):
-    return payload.get("session_id") or os.environ.get("CLAUDE_SESSION_ID") or "nosession"
+def session_id(payload: dict) -> str:
+    raw = payload.get("session_id") or os.environ.get("CLAUDE_SESSION_ID") or "nosession"
+    # Sanitize session id to prevent path traversal
+    return re.sub(r"[^a-zA-Z0-9_-]", "", str(raw)) or "nosession"
 
 
-def seen_path(sid):
+def seen_path(sid: str) -> Path:
     return project_dir() / ".claude" / (".nudge-seen-" + sid)
+
 
 
 def load_seen(path):
@@ -171,10 +178,12 @@ def main():
             return 0
         payload = json.loads(content)
         tool_name = payload.get("tool_name", "")
-        file_path = payload.get("tool_input", {}).get("file_path", "")
+        tool_input = payload.get("tool_input", {}) or {}
+        file_path = tool_input.get("file_path") or tool_input.get("path") or tool_input.get("TargetFile") or ""
 
         if not file_path:
             return 0
+
         target = Path(file_path).resolve()
         root = project_dir().resolve()
         if not target.is_relative_to(root):

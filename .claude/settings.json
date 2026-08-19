@@ -14,6 +14,20 @@
           {
             "type": "command",
             "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-load-adr-index.py\""
+          },
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-mvmcp-freshness.py\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-require-api-read.py\""
           }
         ]
       }
@@ -39,6 +53,10 @@
           },
           {
             "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-check-api.py\""
+          },
+          {
+            "type": "command",
             "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-dispatch-guardians.py\""
           }
         ]
@@ -46,4 +64,5 @@
     ]
   }
 }
+
 

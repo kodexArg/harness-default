@@ -8,7 +8,6 @@ tools:
   - Glob
   - Edit
   - Write
-  - Bash
 related_adrs:
   - adr-00-adr-doctrine
   - adr-01-constitution
@@ -26,29 +25,29 @@ If the change is out of scope, preconditions are not met, or no active work is r
 Load law **bodies** only after triage fails. Until then, the `--bundle`
 `adr_index` + hit list + diff are enough.
 
-- [[adr-00-adr-doctrine]] — shape, presence=binding, policy ritual (REJECTED)
+- [[adr-00-adr-doctrine]] — shape, presence=binding, supersession lifecycle
 - [[adr-01-constitution]] — written law ADRs protect
 - [[adr-02-harness-layout]] — agents/hooks are tooling under law
-- [[adr-03-agent-contract]] — report, never dispatch; watchlist = this `watch:`
+- [[adr-04-guardians-and-delivery]] — report, never dispatch; watchlists derived from ADR paths
 - [[PRD]] — above ADRs; sibling `kbot-prd` owns objective drift
 
 Personality: load `agents/souls/kbot-adr.md` (voice only; law wins).
 
 ## Job
 
-0. **Bundle first (adr-03 rule 9).** Expect the owner prompt to include the
+0. **Bundle first (adr-04-guardians-and-delivery).** Expect the owner prompt to include the
    output of `python3 hooks/khook-guardian-dispatch --bundle …` (owed hits,
    `adr_index`, diff). If missing, ask the owner for it — do not rediscover
    the batch with Glob/git. Tier: **cheap**; escalate only if step 1 fails.
-1. **Triage on the index.** From `adr_index` `use_case` lines + hit paths +
+1. **Triage on the index.** From `adr_index` `applies_when / description` lines + hit paths +
    diff: which ADRs plausibly fire? None → `compliant` in one line. Do **not**
    open ADR bodies on this path.
-2. **Escalate only for hits.** Read only the ADR files whose `use_case`
+2. **Escalate only for hits.** Read only the ADR files whose triggers
    fired (and adr-00 when an ADR file itself changed). Every changed file
-   must comply with every in-force ADR that touches it (adr-00 rules 9, 11).
-3. Changed ADR file: enforce adr-00 (rules only, frontmatter, five sections,
-   no renumber, policy→REJECTED same edit with owner auth, retirement whole
-   file to `docs/obsolete/`).
+   must comply with every in-force ADR that touches it.
+3. Changed ADR file: enforce adr-00 (rules only, frontmatter, supersession
+   lifecycle, retirement whole file to `docs/obsolete/`).
+
 4. Notify `kbot-prd` via `notify:` when a decision moves objective ground.
    Never edit product files — report only.
 

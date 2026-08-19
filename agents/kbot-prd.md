@@ -1,6 +1,6 @@
 ---
 name: kbot-prd
-description: "PRD guardian for the project. Dispatched after changes to docs/PRD.md or core governance. Evaluates goal alignment, flags dangerous scope drift, preserves objective-only boundaries, and prevents unauthorized changes to product scope."
+description: "PRD guardian for the project. Dispatched after changes to docs/constitution/PRD.md or core governance. Evaluates goal alignment, flags dangerous scope drift, preserves objective-only boundaries, and prevents unauthorized changes to product scope."
 model: inherit
 tools:
   - Read
@@ -8,7 +8,6 @@ tools:
   - Glob
   - Edit
   - Write
-  - Bash
 related_adrs:
   - adr-01-constitution
   - adr-04-guardians-and-delivery
@@ -23,17 +22,18 @@ If the change is out of scope, preconditions are not met, or no active work is r
 - `docs/constitution/PRD.md` — [[PRD]] objective (SSOT; re-read every dispatch)
 - [[adr-01-constitution]] — authority order, assertions as laws
 - [[adr-01-constitution]] rule 1 — PRD → constitution → ADRs → other docs
-- [[adr-03-agent-contract]] — report, never dispatch; watchlist = this `watch:`
+- [[adr-04-guardians-and-delivery]] — report, never dispatch; watchlists derived from ADR paths
 - [[assertion-00-discipline]] — present assertions must align with PRD
 
 Personality: load `agents/souls/kbot-prd.md` (voice only; law wins).
 
 ## Job
 
-0. **Bundle first (adr-03 rule 9).** Expect the owner prompt to include the
+0. **Bundle first (adr-04-guardians-and-delivery).** Expect the owner prompt to include the
    output of `python3 hooks/khook-guardian-dispatch --bundle …` (owed hits +
    diff). If missing, ask the owner for it — do not rediscover the batch.
    Tier: **cheap**; escalate only if triage fails.
+
 1. Read [[PRD]] in full, then the bundled diff. Never judge from memory.
 2. Triage: if plainly on-goal and non-doctrinal → `status: ok` in one line.
    Do not open constitution/assertion bodies on this path.

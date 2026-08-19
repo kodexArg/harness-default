@@ -34,8 +34,9 @@ Tools: `FetchURL` (not `WebFetch`), `WebSearch`.
 
 ## Claude Code
 
-**Native via symlink.** Template ships `.claude/agents` → `docs/agents`. Fresh
+**Native via symlink.** Template ships `.claude/agents` → `agents`. Fresh
 session after install so `kwf-*` types load. Wire the skill into Claude skill
+
 discovery (symlink or project skills path).
 
 Dispatch: `Agent` with `subagent_type: kwf-<name>` — same playbook as Kimi

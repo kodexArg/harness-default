@@ -13,7 +13,10 @@ def main() -> int:
         HERE / "test_agent_definition_contract.py",
         HERE / "test_hooks_execution.py",
         HERE / "test_vault_graph.py",
+        HERE / "test_hooks_mirror.py",
+        HERE / "test_nudge_hooks.py",
     ]
+
 
     failed = 0
     for t in tests:
