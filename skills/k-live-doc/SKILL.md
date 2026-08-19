@@ -1,6 +1,7 @@
 ---
 name: k-live-doc
 description: Stamp and re-sync the live-doc block (wikilinks-only) on every code file in this template, linking each file to the ADRs and docs that govern it, and regenerate docs/CODEMAP.md. The stamped project name comes from the PROJECT_SLUG env var; the linker's fallback when unset is this template's reference slug. Use when adding or moving code, changing which ADR governs a file, or when a live-doc block is missing/stale.
+version: v0.1.0
 ---
 
 > [!warning] Ported skill — remap before trusting

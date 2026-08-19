@@ -1,6 +1,7 @@
 ---
 name: k-reporte
 description: SOLO ESPAÑOL. Construye UN reporte HTML oscuro, mobile-first y autocontenido (Presentation Orange) a partir del cierre de un trabajo, del último mensaje del asistente, o de instrucciones explícitas del usuario — valida mermaid y guarda en ~/Documents/k-reporte/. Primero enruta la intención (resumen de job · brief del último mensaje · brief explícito). Traduce TODO el input al español y escribe el reporte + la respuesta de chat en español. Usar cuando kodex corre /k-reporte o pide un reporte HTML en español / para el celular / WhatsApp en español. El gemelo en inglés es /k-report. Estética fija: near-black cálido, naranja racionado, Nunito + DM Mono, Lucide, mermaid temático. Nunca improvisar diseño.
+version: v0.1.0
 ---
 
 > [!warning] Ported skill — remap before trusting

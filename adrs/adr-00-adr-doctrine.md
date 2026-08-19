@@ -3,6 +3,7 @@ title: adr-00-adr-doctrine
 type: adr
 status: active
 created: 2026-08-18
+version: v0.1.0
 tags: [adr, doctrine, harness, rules, frontmatter]
 paths:
   - "adrs/adr-*.md"
@@ -33,6 +34,7 @@ Rules only; facts, tables, specs, and explanations live in `docs/` and are reach
    - `type`: always `adr`.
    - `status`: `active` or `defered`.
    - `created`: `YYYY-MM-DD`, the date first written; never changes.
+   - `version`: mandatory harness version matching root `CHANGELOG.md` (e.g. `v0.1.0`).
    - `tags`: inline list for retrieval, lowercase, `adr` first.
    - `paths`: list of file globs governed by this rule (deterministic hook and subagent trigger).
    - `related_adrs`: list of related ADR slugs. Cross-ADR relationships are declared here rather than inlining ADR links in the rule body.

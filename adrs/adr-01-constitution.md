@@ -3,6 +3,7 @@ title: adr-01-constitution
 type: adr
 status: active
 created: 2026-08-18
+version: v0.1.0
 tags: [adr, constitution, hierarchy, authority]
 paths:
   - "docs/constitution/PRD.md"

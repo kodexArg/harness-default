@@ -11,12 +11,12 @@ def main() -> int:
     tests = [
         HERE / "test_adr_schema.py",
         HERE / "test_agent_definition_contract.py",
+        HERE / "test_version_consistency.py",
         HERE / "test_hooks_execution.py",
         HERE / "test_vault_graph.py",
         HERE / "test_hooks_mirror.py",
         HERE / "test_nudge_hooks.py",
     ]
-
 
     failed = 0
     for t in tests:

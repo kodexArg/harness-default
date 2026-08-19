@@ -1,3 +1,9 @@
+---
+title: Obsidian Properties Reference
+description: Frontmatter schema, property types, and metadata conventions for markdown notes
+version: v0.1.0
+updated: 2026-08-18
+---
 # Properties (Frontmatter) Reference
 
 Properties use YAML frontmatter at the start of a note:

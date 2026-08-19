@@ -3,6 +3,7 @@ title: AGENTS
 type: index
 status: active
 created: 2026-08-18
+version: v0.1.0
 tags: [harness, index, multi-runtime]
 ---
 

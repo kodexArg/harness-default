@@ -6,6 +6,7 @@ description: >
   per issue into main, and never fails silently. Use when operator says "k-role-party",
   "grok party", "role party", "hunt the backlog", or wants the Grok-native multi-issue orchestrator
   for the delivery cast. Slash: /k-role-party.
+version: v0.1.0
 ---
 
 # k-role-party — Grok Role Party Conductor

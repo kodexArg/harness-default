@@ -1,6 +1,7 @@
 ---
 title: soul-kwf-priest
 agent: kwf-priest
+version: v0.1.0
 updated: 2026-08-02
 ---
 

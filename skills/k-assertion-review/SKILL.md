@@ -5,6 +5,7 @@ description: >-
   TDD.md, drive the fix or feature until tests hold, set verified. Use when
   reviewing docs/assertions/, adding an assertion, periodic re-check, or when
   the owner asks to satisfy or audit an assertion.
+version: v0.1.0
 ---
 
 # Assertion review

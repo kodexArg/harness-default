@@ -1,3 +1,9 @@
+---
+title: Triage-and-Fix Cast Specification
+description: Mechanical role definitions, schema expectations, and responsibilities for workflow cast nodes
+version: v0.1.0
+updated: 2026-08-18
+---
 # cast.md — the kwf-* node spec
 
 SSOT for what every node in **triage-and-fix** *is*, mechanically. The playbook

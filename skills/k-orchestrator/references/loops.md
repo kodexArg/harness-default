@@ -1,3 +1,9 @@
+---
+title: Loops, Workflows & Continuous Agents
+description: Continuous evaluation loops, git-backed durable state, and multi-pass workflow layering
+version: v0.1.0
+updated: 2026-08-18
+---
 # Loops, Workflows & Continuous Agents (2026)
 
 The team model (see [agent-teams.md](agent-teams.md)) is the default. Everything

@@ -9,6 +9,7 @@ tools:
   - Edit
   - Write
   - Bash
+version: v0.1.0
 related_adrs:
   - adr-02-harness-layout
 ---

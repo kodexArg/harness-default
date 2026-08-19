@@ -1,3 +1,9 @@
+---
+title: Specialized Orchestration Subagents
+description: Specialized worker subagent batteries, naming rules, and tier model policies
+version: v0.1.0
+updated: 2026-08-18
+---
 # Specialized Subagents (orch-* battery)
 
 An extensible battery of task-specific workers, distinct from the generic effort tiers (`kbot-low/medium/high`). Naming convention: **every specialized tool starts with `orch-`**. Add new ones here as the battery grows.

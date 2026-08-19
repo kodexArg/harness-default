@@ -2,8 +2,8 @@
 """ADR conformance hook (PostToolUse on Write|Edit).
 
 Enforces adr-00-adr-doctrine on every file written under adrs/: filename pattern
-and the structured 10 frontmatter keys (title, type, status, created, tags, paths,
-related_adrs, related_agents, description, applies_when).
+and the structured frontmatter keys (title, type, status, created, version, tags,
+paths, related_adrs, related_agents, description, applies_when).
 Exit 2 feeds violations back to the agent; internal errors exit 0.
 """
 
@@ -13,6 +13,7 @@ import json
 import os
 import re
 import sys
+import subprocess
 from pathlib import Path
 
 FILENAME = re.compile(r"^adr-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
@@ -21,6 +22,7 @@ REQUIRED_KEYS = (
     "type",
     "status",
     "created",
+    "version",
     "tags",
     "paths",
     "related_adrs",
@@ -51,6 +53,21 @@ def project_dir() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
+def get_default_version(root: Path) -> str:
+    changelog = root / "CHANGELOG.md"
+    if changelog.is_file():
+        try:
+            text = changelog.read_text(encoding="utf-8")
+            m = re.search(r"^version:[ \t]*(.*)$", text, re.MULTILINE)
+            if m and m.group(1).strip().strip("\"'"):
+                return m.group(1).strip().strip("\"'")
+            h = re.search(r"^##\s+\[?([vV]?\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)]?", text, re.MULTILINE)
+            if h:
+                return h.group(1).strip()
+        except Exception:
+            pass
+    return "v0.1.0"
+
 
 def parse(text: str) -> tuple[dict[str, str] | None, list[str]]:
     match = re.match(r"\A---\n(.*?)\n---\n?", text, re.DOTALL)
@@ -63,16 +80,18 @@ def parse(text: str) -> tuple[dict[str, str] | None, list[str]]:
             key, _, val = line.partition(":")
             k = key.strip()
             keys.append(k)
-            fm[k] = val.strip()
+            fm[k] = val.strip().strip("\"'")
     return fm, keys
 
 
-def check(path: Path) -> list[str]:
+def check(path: Path, root: Path | None = None) -> list[str]:
     posix = path.as_posix()
     if "/adrs/" not in posix:
         return []
     if path.suffix != ".md":
         return []
+    if root is None:
+        root = project_dir().resolve()
     problems = []
     if not FILENAME.match(path.name):
         problems.append(
@@ -104,6 +123,13 @@ def check(path: Path) -> list[str]:
     if title and title != path.stem:
         problems.append(f"{path.name}: frontmatter 'title' '{title}' != filename stem '{path.stem}'.")
 
+    version = fm.get("version")
+    expected_version = get_default_version(root)
+    if version and version != expected_version:
+        problems.append(
+            f"{path.name}: frontmatter 'version' '{version}' != harness default '{expected_version}'."
+        )
+
     desc = fm.get("description", "").strip('"\'')
     if desc:
         words = len(desc.split())
@@ -132,14 +158,14 @@ def main() -> int:
                 else:
                     targets.append(p)
         for t in targets:
-            problems.extend(check(t))
+            problems.extend(check(t, root))
 
     # Case 2: Interactive terminal with no args -> check all ADRs
     elif sys.stdin.isatty():
         adrs_dir = root / "adrs"
         if adrs_dir.is_dir():
             for t in sorted(adrs_dir.glob("adr-*.md")):
-                problems.extend(check(t))
+                problems.extend(check(t, root))
 
     # Case 3: Piped stdin (Claude / agent tool hook JSON)
     else:
@@ -154,7 +180,7 @@ def main() -> int:
             target = Path(file_path).resolve()
             if not target.is_relative_to(root):
                 return 0
-            problems = check(target)
+            problems = check(target, root)
         except Exception:
             return 0
 
@@ -166,4 +192,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

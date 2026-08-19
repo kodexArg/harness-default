@@ -1,6 +1,7 @@
 ---
 title: Clone
 description: First-run checklist after cloning harness-default — code roots, hooks, vault, skills, issue delivery
+version: v0.1.0
 updated: 2026-08-18
 ---
 

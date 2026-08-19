@@ -1,6 +1,7 @@
 ---
 title: Glossary
 description: Canonical names for every domain concept — how we call each thing
+version: v0.1.0
 updated: 2026-08-18
 ---
 

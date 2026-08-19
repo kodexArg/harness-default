@@ -1,3 +1,9 @@
+---
+title: In-Palette Dark Mermaid Guide
+description: Theming guidelines, palette variables, and syntax conventions for dark-themed mermaid diagrams
+version: v0.1.0
+updated: 2026-08-18
+---
 # mermaid — intensive, in-palette, dark
 
 kodex uses heavy mermaid. Every diagram must look like it belongs in the dark

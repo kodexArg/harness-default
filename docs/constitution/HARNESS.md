@@ -1,6 +1,7 @@
 ---
 title: Harness
 description: What this harness is, how its pieces fit together, and how to work inside it
+version: v0.1.0
 updated: 2026-08-18
 ---
 

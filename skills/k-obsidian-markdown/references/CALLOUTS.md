@@ -1,3 +1,9 @@
+---
+title: Obsidian Callouts Reference
+description: Syntax, callout types, collapsible callouts, and styling conventions for Obsidian notes
+version: v0.1.0
+updated: 2026-08-18
+---
 # Callouts Reference
 
 ## Basic Callout

@@ -1,3 +1,9 @@
+---
+title: Interactive Compare Tab Component
+description: Vanilla JavaScript tab switcher and comparison card layout for side-by-side analysis
+version: v0.1.0
+updated: 2026-08-18
+---
 # Interactive compare — vanilla JS tab switcher
 
 Use when a report compares **two sides** (A vs B, grok vs kodex, before/after) and

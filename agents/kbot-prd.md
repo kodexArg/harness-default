@@ -6,6 +6,7 @@ tools:
   - Read
   - Grep
   - Glob
+version: v0.1.0
 related_adrs:
   - adr-01-constitution
   - adr-04-guardians-and-delivery

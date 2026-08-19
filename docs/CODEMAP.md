@@ -3,6 +3,7 @@ title: CODEMAP
 type: reference
 status: active
 created: 2026-07-14
+version: v0.1.0
 tags: [harness, codemap, generated]
 ---
 

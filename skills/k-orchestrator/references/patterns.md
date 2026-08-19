@@ -1,3 +1,9 @@
+---
+title: Advanced Orchestration Patterns
+description: Fan-out, pipeline, tournament, and committee patterns for multi-agent workflows
+version: v0.1.0
+updated: 2026-08-18
+---
 # Advanced Orchestration Patterns
 
 ## Fan-Out

@@ -1,6 +1,7 @@
 ---
 title: TDD
 description: Test-first workflow for assertion-driven work — tests demand the fix, then prove it forever
+version: v0.1.0
 updated: 2026-08-02
 ---
 

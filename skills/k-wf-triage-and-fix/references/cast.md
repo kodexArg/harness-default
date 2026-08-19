@@ -1,3 +1,9 @@
+---
+title: Workflow Triage-and-Fix Cast Specification
+description: Mechanical node specifications and responsibilities for the workflow state machine
+version: v0.1.0
+updated: 2026-08-18
+---
 # cast.md — the node spec
 
 SSOT for what every node in **triage-and-fix** *is*, mechanically. The script that

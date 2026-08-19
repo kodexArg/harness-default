@@ -1,3 +1,9 @@
+---
+title: Agent Teams Orchestration Mechanics
+description: Lead-worker mechanics, subagent spawning, shared task lists, and messaging protocols
+version: v0.1.0
+updated: 2026-08-18
+---
 # Agent Teams — real API, primary path
 
 k-orchestrator runs as a **team lead** using `Agent()` spawns + the shared

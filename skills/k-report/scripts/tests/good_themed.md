@@ -1,3 +1,9 @@
+---
+title: Mermaid Lint Test Fixture - Good Themed
+description: Known-good test fixture for verifying valid styled mermaid diagrams
+version: v0.1.0
+updated: 2026-08-18
+---
 # fixture: KNOWN-GOOD — brace-free, themed, classDef component kit
 
 ```mermaid

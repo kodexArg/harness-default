@@ -3,6 +3,7 @@ title: adr-03-agent-contract
 type: adr
 status: active
 created: 2026-08-18
+version: v0.1.0
 tags: [adr, agents, frontmatter, contract, rules]
 paths:
   - "agents/*.md"
@@ -22,7 +23,7 @@ applies_when: "Authoring, editing, renaming, or validating any agent definition 
 
 Rules only; agent registry and capability tables live in [[HARNESS]].
 
-1. **Closed key set.** Every file under `agents/` declares exactly these frontmatter keys: `name`, `description`, `model`, `tools`, `related_adrs`. The key `color` is tolerated as cosmetic. Any other key is a defect.
+1. **Closed key set.** Every file under `agents/` declares exactly these frontmatter keys: `name`, `description`, `model`, `tools`, `version`, `related_adrs`. The key `color` is tolerated as cosmetic. Any other key is a defect.
 
 2. **Name matches filename stem.** `name` must exactly match the filename stem (`kbot-<role>` or `kwf-<role>`).
 

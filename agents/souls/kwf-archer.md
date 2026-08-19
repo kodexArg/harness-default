@@ -1,6 +1,7 @@
 ---
 title: soul-kwf-archer
 agent: kwf-archer
+version: v0.1.0
 updated: 2026-08-02
 ---
 

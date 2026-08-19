@@ -9,12 +9,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 ADRS = ROOT / "adrs"
+CHANGELOG = ROOT / "CHANGELOG.md"
 
 REQUIRED_KEYS = (
     "title",
     "type",
     "status",
     "created",
+    "version",
     "tags",
     "paths",
     "related_adrs",
@@ -43,10 +45,19 @@ def scalar(fm: str, key: str) -> str | None:
     return match.group(1).strip() if match else None
 
 
+def get_expected_version() -> str:
+    if CHANGELOG.is_file():
+        m = re.search(r"^version:[ \t]*(.*)$", CHANGELOG.read_text(encoding="utf-8"), re.MULTILINE)
+        if m and m.group(1).strip().strip("\"'"):
+            return m.group(1).strip().strip("\"'")
+    return "v0.1.0"
+
+
 def test_adr_frontmatters():
     failures = []
     adr_files = sorted(ADRS.glob("adr-*.md"))
     assert len(adr_files) > 0, "No ADR files found in adrs/"
+    expected_version = get_expected_version()
 
     for path in adr_files:
         rel = path.relative_to(ROOT)
@@ -72,6 +83,10 @@ def test_adr_frontmatters():
         status = scalar(fm, "status")
         if status not in ("active", "defered"):
             failures.append(f"{rel}: invalid status `{status}` (allowed: active, defered)")
+
+        version = scalar(fm, "version")
+        if version != expected_version:
+            failures.append(f"{rel}: version `{version}` does not match expected `{expected_version}`")
 
         desc = scalar(fm, "description") or ""
         words = len(desc.split())

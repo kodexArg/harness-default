@@ -1,6 +1,7 @@
 ---
 title: API
 description: API surface — endpoints, contracts, auth, and versioning
+version: v0.1.0
 updated: 2026-08-06
 ---
 

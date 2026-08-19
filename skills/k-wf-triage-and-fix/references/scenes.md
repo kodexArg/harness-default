@@ -1,3 +1,9 @@
+---
+title: Workflow Scene Bank
+description: Terminal frame templates and slot formatting for workflow phase transitions
+version: v0.1.0
+updated: 2026-08-18
+---
 # Scene bank
 
 Closed set of terminal frames. The workflow SELECTS one frame by state

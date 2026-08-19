@@ -1,3 +1,9 @@
+---
+title: Icon Reference for Reports
+description: Lucide and Simple Icons usage, styling parameters, and SVG integration for report generation
+version: v0.1.0
+updated: 2026-08-18
+---
 # Icon Reference — k-report
 
 Icon set: **Lucide** (stroke-width 1.75, round caps/joins, 24×24 grid).  

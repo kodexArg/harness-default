@@ -2,6 +2,7 @@
 name: k-orchestrator
 description: Switch the main chat into orchestrator mode as an Agent Team lead. ALWAYS forms an agent team on startup, then decomposes the user's task and assigns read/write work to teammates (kbot-low/medium/high roles) via a shared task list — never implementing inline. Use when the user types /k-orchestrator or starts a message line with `->` (direct dispatch).
 argument-hint: "[task]"
+version: v0.1.0
 ---
 
 > [!warning] Ported skill — remap before trusting

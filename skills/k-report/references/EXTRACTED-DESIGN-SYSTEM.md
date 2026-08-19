@@ -1,3 +1,9 @@
+---
+title: Presentation Orange Design System
+description: Canonical design tokens, typography, color palette, and layout specifications for reports
+version: v0.1.0
+updated: 2026-08-18
+---
 # Source design system — "Presentation Orange" (extracted SSOT)
 
 Extracted 2026-06-13 from kodex's claude.ai design artifact

@@ -1,3 +1,9 @@
+---
+title: Team Party Shared Context
+description: Shared state and contract specification for nodes in the automated triage and fix party
+version: v0.1.0
+updated: 2026-08-18
+---
 # team-party.md
 
 You are one node in **triage-and-fix**: a deterministic workflow that takes one issue and

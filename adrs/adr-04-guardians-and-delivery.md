@@ -3,6 +3,7 @@ title: adr-04-guardians-and-delivery
 type: adr
 status: active
 created: 2026-08-18
+version: v0.1.0
 tags: [adr, guardians, delivery, git, triage, pr]
 paths:
   - "hooks/khook-repo-health.py"

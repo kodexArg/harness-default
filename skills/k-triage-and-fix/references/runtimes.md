@@ -1,3 +1,9 @@
+---
+title: Triage-and-Fix Runtime Adapters
+description: Host spawning mechanics and model tier mappings across Claude, Grok, and Antigravity runtimes
+version: v0.1.0
+updated: 2026-08-18
+---
 # Runtime adapters — triage-and-fix
 
 The playbook (`SKILL.md`) and every `kwf-*` YAML contract are identical across

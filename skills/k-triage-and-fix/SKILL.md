@@ -18,6 +18,7 @@ compatibility: >
 metadata:
   author: kodexArg
   version: "1.0.0"
+version: v0.1.0
 ---
 
 # triage-and-fix

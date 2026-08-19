@@ -1,3 +1,9 @@
+---
+title: PR Requirement and Dependency System
+description: Dependency tracking and prerequisite order verification between interdependent pull requests
+version: v0.1.0
+updated: 2026-08-18
+---
 # deps.md — the PR REQUIREMENT system
 
 The problem: an issue (or a PR) sometimes **trusts another PR, not just the code on

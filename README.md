@@ -1,6 +1,7 @@
 ---
 title: harness-default
 description: Generic, stack-agnostic, and vendor-neutral default harness for fullstack engineering projects
+version: v0.1.0
 updated: 2026-08-18
 ---
 

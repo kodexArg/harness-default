@@ -1,6 +1,7 @@
 ---
 title: Use Cases
 description: The system's behavior as Gherkin scenarios — an open/close list, one case per chapter
+version: v0.1.0
 updated: 2026-08-02
 ---
 

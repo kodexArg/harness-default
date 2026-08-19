@@ -1,3 +1,9 @@
+---
+title: Orchestration Prompt Doctrine
+description: Concise prompt engineering guidelines focusing on outcomes and interfaces over micro-steps
+version: v0.1.0
+updated: 2026-08-18
+---
 # Prompt Doctrine: WHAT not HOW
 
 The orchestrator's biggest token sink — and biggest source of fragile dispatches — is over-specified prompts. A prompt that dictates `curl`/`jq`/`sudo` step-by-step:

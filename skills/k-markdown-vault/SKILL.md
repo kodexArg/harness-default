@@ -1,6 +1,7 @@
 ---
 name: k-markdown-vault
 description: Drive the markdown-vault MCP — the first source of truth for docs/ content. Use for any question about docs/ prose or its wikilink graph (search, read, backlinks, similarity), before Grep/Read. Also covers bootstrap, reindex, and the write caveat. Ruled by HARNESS.
+version: v0.1.0
 ---
 
 > [!warning] Ported skill — remap before trusting

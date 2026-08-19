@@ -3,6 +3,7 @@ title: adr-02-harness-layout
 type: adr
 status: active
 created: 2026-08-18
+version: v0.1.0
 tags: [adr, harness, layout, naming, skills, hooks, agents]
 paths:
   - "skills/*"

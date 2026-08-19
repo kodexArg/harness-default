@@ -1,3 +1,9 @@
+---
+title: Tool Availability Matrix
+description: Tool permissions, capability boundaries, and tier matrices across orchestration roles
+version: v0.1.0
+updated: 2026-08-18
+---
 # Tool Availability Matrix
 
 ## By Tier

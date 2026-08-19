@@ -1,6 +1,7 @@
 ---
 name: k-triage
 description: Cheap, fast triage of an idea or proposed change BEFORE committing real tokens. Restates the idea in English, scouts read-only with parallel haiku workers (kbot-low), and returns a fixed Spanish verdict card — one paragraph, affected skills, and a 1-3 matrix (Severidad / Colateral / Esfuerzo) drawn with ●○ icons. Use when kodex says "triage", "triagealo", "evaluá esta idea", "qué tan grave / riesgoso / caro es", "vale la pena?", or pitches a change and wants a quick go/no-go read instead of an implementation.
+version: v0.1.0
 ---
 
 > [!warning] Ported skill — remap before trusting

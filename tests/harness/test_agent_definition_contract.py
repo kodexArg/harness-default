@@ -10,8 +10,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 AGENTS = ROOT / "agents"
 ADRS = ROOT / "adrs"
+CHANGELOG = ROOT / "CHANGELOG.md"
 
-REQUIRED_KEYS = ("name", "description", "model", "tools", "related_adrs")
+REQUIRED_KEYS = ("name", "description", "model", "tools", "related_adrs", "version")
 COSMETIC_KEYS = ("color",)
 SANCTIONED_MODELS = ("inherit",)
 DESCRIPTION_MIN_WORDS = 25
@@ -54,6 +55,14 @@ def sequence(fm: str, key: str) -> list[str]:
     return items
 
 
+def get_expected_version() -> str:
+    if CHANGELOG.is_file():
+        m = re.search(r"^version:[ \t]*(.*)$", CHANGELOG.read_text(encoding="utf-8"), re.MULTILINE)
+        if m and m.group(1).strip().strip("\"'"):
+            return m.group(1).strip().strip("\"'")
+    return "v0.1.0"
+
+
 def test_agent_contracts_and_bidirectional_symmetry():
     failures = []
     if not AGENTS.is_dir() or not any(AGENTS.glob("*.md")):
@@ -61,6 +70,7 @@ def test_agent_contracts_and_bidirectional_symmetry():
 
     adr_slugs = {p.stem for p in ADRS.glob("adr-*.md")}
     agent_edges = {}
+    expected_version = get_expected_version()
 
     for path in sorted(AGENTS.glob("*.md")):
         rel = path.relative_to(ROOT)
@@ -89,6 +99,10 @@ def test_agent_contracts_and_bidirectional_symmetry():
 
         if not QUICK_EXIT.search(body):
             failures.append(f"{rel}: missing Quick exit declaration in body")
+
+        version = scalar(fm, "version")
+        if version != expected_version:
+            failures.append(f"{rel}: version `{version}` != expected `{expected_version}`")
 
         declared_adrs = set(sequence(fm, "related_adrs"))
         for slug in declared_adrs:

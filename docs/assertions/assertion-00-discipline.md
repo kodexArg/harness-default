@@ -1,6 +1,7 @@
 ---
 title: Assertion-00 — Assertion Discipline
 description: Laws the project must pass — owner-reserved, proven by linked tests, driven through TDD into code
+version: v0.1.0
 updated: 2026-08-02
 ---
 
@@ -96,6 +97,7 @@ Copy this block as the starting point for a new assertion.
 ---
 title: Assertion-NN — [Short name]
 description: [The promise, in one line]
+version: v0.1.0
 verified: never
 updated: YYYY-MM-DD
 ---

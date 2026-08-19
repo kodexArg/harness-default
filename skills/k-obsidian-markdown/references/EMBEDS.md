@@ -1,3 +1,9 @@
+---
+title: Obsidian Embeds Reference
+description: Transclusion syntax and guidelines for embedding notes, sections, blocks, and media
+version: v0.1.0
+updated: 2026-08-18
+---
 # Embeds Reference
 
 ## Embed Notes
