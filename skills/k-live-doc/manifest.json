@@ -1,0 +1,12 @@
+{
+  "_comment": "Glob -> live-doc wikilinks. A file's link set is the ordered union of every matching rule. Governed by [[HARNESS]]. Edit here, then re-run link.py to re-sync every block and CODEMAP.md.",
+  "roots": ["backend", "frontend", "interfaces", "services"],
+  "exclude_dirs": [".venv", "node_modules", ".astro", "__pycache__", "dist", ".git", "migrations", "k-live-doc"],
+  "rules": [
+    { "glob": "backend/**/*.py", "links": ["BACKEND"] },
+    { "glob": "frontend/**/*", "links": ["FRONTEND"] },
+    { "glob": "interfaces/**/*", "links": ["INTERFACES"] },
+    { "glob": "services/**/*", "links": ["SERVICES"] }
+  ]
+}
+

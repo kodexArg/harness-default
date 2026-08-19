@@ -26,7 +26,7 @@ user stories here; this harness keeps behavior with its owners:
 
 - **`docs/assertions/`** — the laws. Owner-reserved, kept few; every
   assertion that exists is binding and proven by linked tests through
-  [[TDD]] and `kskill-assertion-review`. None existing is healthy
+  [[TDD]] and `k-assertion-review`. None existing is healthy
   ([[assertion-00-discipline]]).
 - **[[USE-CASES]]** — the behavior, in Gherkin, an open/close list.
 - **[[USER-STORIES]]** — who wants what and why, accepted through their

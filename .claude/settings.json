@@ -5,17 +5,15 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/docs/hooks/khook-load-ssot.py\""
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-repo-health.py\""
+          },
           {
             "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/docs/hooks/khook-require-api-read.py\""
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-load-ssot.py\""
+          },
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-load-adr-index.py\""
           }
         ]
       }
@@ -26,7 +24,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/docs/hooks/khook-require-pr-flow.py\""
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-require-pr-flow.py\""
           }
         ]
       }
@@ -37,18 +35,15 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/docs/hooks/khook-check-adr.py\""
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-check-adr.py\""
           },
           {
             "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/docs/hooks/khook-check-api.py\""
-          },
-          {
-            "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/docs/hooks/khook-dispatch-guardians.py\""
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/khook-dispatch-guardians.py\""
           }
         ]
       }
     ]
   }
 }
+

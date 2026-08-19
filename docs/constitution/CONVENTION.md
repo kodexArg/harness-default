@@ -1,7 +1,7 @@
 ---
 title: Convention
 description: Global conventions that apply to every document in this harness
-updated: 2026-08-02
+updated: 2026-08-18
 ---
 
 ## Frontmatter documentation
@@ -11,7 +11,7 @@ with a YAML frontmatter block. It is the machine-readable summary of the
 document: agents read it to decide whether the file is worth opening, and
 tooling can index it without parsing prose.
 
-Tooling files are exempt: `docs/skills/`, `docs/hooks/`, and `docs/agents/`
+Tooling files are exempt: `skills/`, `hooks/`, and `agents/`
 obey the formats their tools fix (a skill's `SKILL.md` carries `name` +
 `description`), not this convention.
 
@@ -36,7 +36,8 @@ Rules:
   prohibited.
 - Document families may extend the base set with their own keys — assertions
   add `verified` — or their discipline file may own the frontmatter outright:
-  ADRs carry exactly seven fields of their own, and presence in `docs/adrs/`
+  ADRs carry exactly 10 fields of their own, and presence in `adrs/`
   is what makes an ADR binding. See
-  [adr-00-discipline](../adrs/adr-00-discipline.md) and
-  [assertion-00-discipline](../assertions/assertion-00-discipline.md).
+  [[adr-00-adr-doctrine]] and
+  [[assertion-00-discipline]].
+

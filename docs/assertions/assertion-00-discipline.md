@@ -19,7 +19,7 @@ That paragraph states the rules: what (the last three messages), how far
 assertion that cannot be checked is not an assertion.
 
 **Assertions are the entry path for solutions.** The owner writes the law;
-the `kskill-assertion-review` skill interprets it, demands proving tests via
+the `k-assertion-review` skill interprets it, demands proving tests via
 [[TDD]], and that work prepares the fix or feature — above all the tests
 that always verify the law. Tests first, code second; assertion, tests, and
 code coexist in the project.
@@ -55,12 +55,12 @@ At least one link under `### Tests` must point at a runnable test that
 **demonstrates** the law. Example: *backend responds in 500ms or less*
 requires a test that fails when latency exceeds 500ms. Until that link
 exists and the test encodes the rules, the assertion is unmet — the
-`kskill-assertion-review` skill must follow [[TDD]] rather than mark the law
+`k-assertion-review` skill must follow [[TDD]] rather than mark the law
 verified.
 
 ## Review — the assertion-review skill
 
-The skill at `docs/skills/kskill-assertion-review/SKILL.md` is how laws are
+The skill at `skills/k-assertion-review/SKILL.md` is how laws are
 enforced and how solutions enter:
 
 1. Read each assertion (or the one named in the dispatch).

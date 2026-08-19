@@ -1,22 +1,17 @@
 ---
 title: Harness
 description: What this harness is, how its pieces fit together, and how to work inside it
-updated: 2026-08-06
+updated: 2026-08-18
 ---
 
-This harness is a template for fullstack projects. Everything the project
-**knows** lives under `docs/` — the constitution, the living documents, the
-ADR and assertion families, and even the agent tooling. Outside `docs/`
-there is only what the project **is**: the code roots and their state. The
-written knowledge is served as a wikilink-aware vault by
-`markdown-vault-mcp` — see [The vault](#the-vault) below.
+This harness is a generic, stack-agnostic template for agentic software engineering. Written knowledge lives under `docs/` — the constitution, the living documents, and the assertion family. Harness artifacts live at the repository root (`adrs/`, `agents/`, `hooks/`, `skills/`) per [[adr-02-harness-layout]]. The written knowledge is served as a wikilink-aware vault by `markdown-vault-mcp` — see [The vault](#the-vault) below.
 
 ## Tiers and families
 
 Written knowledge comes in two kinds of containers inside `docs/`.
 `docs/constitution/` and the documents sitting directly in `docs/` are
 **tiers**: every document sorts into one of them by a single question — **is
-this both meaningful and stable?** `docs/adrs/` and `docs/assertions/` are
+this both meaningful and stable?** `adrs/` and `docs/assertions/` are
 **families**: numbered, append-only files that do not sort — they
 accumulate, each ruled by its own `-00` discipline file.
 
@@ -59,22 +54,23 @@ When a new document appears, apply the same two tests: *would changing this
 alter how the project is run?* and *do we expect it to change again soon?*
 Only a yes to the first and a no to the second puts it in the constitution.
 
-## docs/adrs/
+## adrs/
 
 Architecture Decision Records: the memory of the why, not just the what. An
 ADR is attached to a *theme* and states numbered rules; its policy may change
 many times in place — each displaced policy recorded in the ADR's own
-`REJECTED` section — without the file ever moving. Presence in `docs/adrs/`
+`REJECTED` section — without the file ever moving. Presence in `adrs/`
 is what makes a rule binding, and a whole file retires to `docs/obsolete/`
 only when its theme ends. Discipline and template in
-[adr-00](../adrs/adr-00-discipline.md). Standing order of the harness ADRs:
+[[adr-00-adr-doctrine]]. Standing order of the harness ADRs:
 
 | ADR | Theme |
 |---|---|
+| [[adr-00-adr-doctrine]] | ADR architecture, structured frontmatter, trigger routing, supersession |
 | [[adr-01-constitution]] | Source markdown — PRD, constitution, families, authority |
-| [[adr-02-harness]] | Skills, hooks, agents — tooling that serves the law |
-| [[adr-03-guardians]] | Guardian agents and the dispatch safety net |
-| [[adr-04-issue-delivery]] | triage-and-fix cast and skill |
+| [[adr-02-harness-layout]] | Skills, hooks, agents, ADRs — root layout and kind-prefixed naming |
+| [[adr-03-agent-contract]] | Frontmatter contracts for agents, model inherit, quick exit, tool sequences |
+| [[adr-04-guardians-and-delivery]] | Guardian gating architecture, repo-health, and issue-to-PR delivery |
 
 ## docs/assertions/
 
@@ -97,11 +93,11 @@ to check:
 Each assertion lives in its own file in `docs/assertions/`, states its rules
 first, and ends with a `## RELATED` open/close list. The `### Tests` chapter
 must link runnable tests that **demonstrate** the law (e.g. latency ≤ 500ms
-→ a test that fails above that bound). The `kskill-assertion-review` skill
+→ a test that fails above that bound). The `k-assertion-review` skill
 interprets the paragraph, demands those tests via [[TDD]], drives the fix or
 feature, and stamps `verified` only when the tests pass.
 
-Assertions are always aligned with `PRD.md` and this constitution. They are
+Assertions are always aligned with `docs/constitution/PRD.md` and this constitution. They are
 the constitution made verifiable — when an assertion and the constitution
 disagree, the assertion is the one that is wrong. Their boundary with
 `REQUIREMENTS.md` is one of form: requirements *enumerate* what must hold;
@@ -120,9 +116,8 @@ in `docs/` regardless.
 ### frontend/ + backend/ — the specific pair
 
 For the classic fullstack webapp. One backend that owns everything — a
-Django REST Framework project is the archetype: routing, auth, ORM, admin,
-the whole service surface in a single place, so splitting it into "services"
-adds nothing. One frontend that is almost always a web client. Documented in
+Django REST Framework or FastAPI project is the archetype: routing, auth, ORM, admin,
+the whole service surface in a single place. One frontend that is almost always a web client. Documented in
 `docs/FRONTEND.md` and `docs/BACKEND.md`.
 
 ### interfaces/ + services/ — the generalistic pair
@@ -154,116 +149,79 @@ readme — their description lives here and in the docs tier.
 ## Issue delivery — triage-and-fix
 
 This harness owns the **law** and the **delivery cast**. Taking one GitHub
-issue to a PR is the in-tree party: skill `docs/skills/kskill-triage-and-fix/`,
-cast `docs/agents/kwf-*.md`. Binding rules: [[adr-04-issue-delivery]].
+issue to a PR is the in-tree party: skill `skills/k-triage-and-fix/`,
+cast `agents/kwf-*.md`. Binding rules: [[adr-04-guardians-and-delivery]].
 Operator steps: [[CLONE]]. Runtime spawn map (Kimi / Claude / Cursor-Grok):
-`docs/skills/kskill-triage-and-fix/references/runtimes.md`.
+`skills/k-triage-and-fix/references/runtimes.md`.
 
 Phases: forest → tavern → camp → stalking → plaza → post-bard. After plaza,
 the owner process runs `guardian-dispatch --bundle`, pastes that payload
-into each owed guardian ([[adr-03-guardians]] rule 9), dispatches them in
-parallel on the cheap tier, and runs `kskill-assertion-review` when assertions
+into each owed guardian ([[adr-04-guardians-and-delivery]]), dispatches them in
+parallel on the cheap tier, and runs `k-assertion-review` when assertions
 were touched. Important features enter as assertion laws ([[TDD]]), not as
 silent code.
 
 ## Agent tooling
 
-Every artifact is prefixed by what it is — `kskill-*` skills, `khook-*` hooks,
-`kbot-*` agents, `kwf-*` the delivery party ([[adr-02-harness]] rule 8). The
+Every artifact is prefixed by what it is — `k-*` skills, `khook-*` hooks,
+`kbot-*` agents, `kwf-*` the delivery party ([[adr-02-harness-layout]]). The
 prefix is how a name read cold says which tree owns it and which contract
 applies.
 
-- **`docs/skills/`** — skills agnostic to the LLM but useful for this
-  project: self-contained instruction packages an agent loads on demand.
-  Wire each into the runtime's skill discovery (symlink or reference).
-  - **law skills** — `kskill-assertion-review` (laws → tests → code via
-    [[TDD]]) and `kskill-triage-and-fix` (issue → PR party). These two are the
-    standing residents; the law is their subject.
-  Every skill below the two law skills was **ported from another clone** and
-  wears a banner saying so: its citations and its hardcoded specifics (cloud
-  accounts, profiles, slugs, template paths) belong to the origin project and
-  bind nothing here until remapped ([[adr-02-harness]] rule 5).
+- **`skills/`** — self-contained instruction packages an agent loads on demand.
+  - **law skills** — `k-assertion-review` (laws → tests → code via
+    [[TDD]]) and `k-triage-and-fix` (issue → PR party).
+  - **docs skills** — `k-live-doc` (code ↔ doc linker),
+    `k-markdown-vault` (query the `docs/` vault graph),
+    `k-obsidian-markdown` (vault-flavored markdown),
+    `k-report` / `k-reporte` (self-contained dark HTML reports in English/Spanish).
+  - **orchestration skills** — `k-orchestrator` (main chat as team lead
+    over `kbot-*` workers), `k-triage` (cheap go/no-go card before spending
+    tokens), `k-wf-triage-and-fix` (workflow-driven delivery party).
 
-  - **stack skills** — `kskill-astro-7` (Astro 7 + Svelte islands),
-    `kskill-django-6-drf` (Django 6 + DRF), and the AWS set
-    (`kskill-aws-s3`, `-iam`, `-containers`, `-cost`, `-observability`,
-    `-cloudwatch-query`, `-cloudwatch-alarms`, `-secrets-manager`,
-    `-secrets-create`, `-troubleshoot`).
-  - **docs skills** — `kskill-live-doc` (code ↔ doc linker),
-    `kskill-markdown-vault` (query the `docs/` vault graph),
-    `kskill-obsidian-markdown` (vault-flavored markdown),
-    `kskill-report` / `kskill-reporte` (one self-contained dark HTML report,
-    English and Spanish twins; they save to disk and report the path —
-    this harness ships no send channel).
-  - **orchestration skills** — `kskill-orchestrator` (main chat as team lead
-    over `kbot-*` workers), `kskill-triage` (cheap go/no-go before spending
-    tokens), `kskill-wf-triage-and-fix` (the same delivery party driven by the
-    Workflow tool instead of by hand). These serve
-    [[adr-04-issue-delivery]] — they do not outrank it, and where a mechanic
-    differs the ADR is right and the skill is the defect.
-- **`docs/hooks/`** — LLM-agnostic automation attached to agent or tooling
-  lifecycle events. The first resident is the dispatch safety net
-  ([[adr-03-guardians]] rules 3, 8, 9): `khook-guardian-dispatch` maps a batch's
-  changed files against the `watch:` globs each agent declares in its own
-  frontmatter and names the guardians owed; `--bundle` adds hit paths, diff,
-  and a live ADR `use_case` index for the owner to paste into each guardian
-  prompt. `khook-pre-commit` speaks the name-only form at every commit — wired
-  once per clone with
-  `ln -s ../../docs/hooks/khook-pre-commit .git/hooks/pre-commit`. It warns rather
-  than blocks: the duty it voices binds the agent that reads it. The same
-  script is the post-bard entry for [[adr-04-issue-delivery]].
+- **`hooks/`** — deterministic automation attached to agent or tooling
+  lifecycle events.
+  - `khook-repo-health.py`: repo CI state, branch, uncommitted count, harness structure and symlink health.
+  - `khook-load-ssot.py`: preloads PRD.md and API.md into context at session start.
+  - `khook-load-adr-index.py`: preloads the active ADR trigger index at session start.
+  - `khook-require-pr-flow.py`: issues non-blocking PR-flow reminders on git commits/pushes.
+  - `khook-check-adr.py`: enforces ADR frontmatter schema and doctrine shape.
+  - `khook-guardian-dispatch` / `khook-dispatch-guardians.py`: agnostic engine and Claude wrapper mapping changed files to owed guardian agents.
+  - `khook-pre-commit`: git pre-commit hook running staged guardian checks.
 
   The Claude-native lifecycle hooks, wired in `.claude/settings.json`:
 
   | Hook | Event | Duty |
   |---|---|---|
-  | `khook-load-ssot.py` | SessionStart | injects [[PRD]] and [[API]] so the standing requirement is met deterministically |
-  | `khook-require-api-read.py` | UserPromptSubmit | a prompt touching the route surface must re-read [[API]] first |
-  | `khook-require-pr-flow.py` | PreToolUse (Bash) | issue → PR reminder on commit / push to main ([[adr-04-issue-delivery]]) |
-  | `khook-check-adr.py` | PostToolUse (Write\|Edit) | every ADR written matches the [[adr-00-discipline]] shape |
-  | `khook-check-api.py` | PostToolUse (Write\|Edit) | no route in `urls.py` without its [[API]] row |
-  | `khook-dispatch-guardians.py` | PostToolUse (Write\|Edit) | Claude-native voice of the dispatch safety net; delegates the watchlist to `khook-guardian-dispatch` |
+  | `khook-repo-health.py` | SessionStart | Diagnostic of repo health, uncommitted status, and symlinks |
+  | `khook-load-ssot.py` | SessionStart | Injects [[PRD]] and [[API]] into context |
+  | `khook-load-adr-index.py` | SessionStart | Injects active ADR trigger index into context |
+  | `khook-require-pr-flow.py` | PreToolUse (Bash) | PR-flow reminder on commit / push to main |
+  | `khook-check-adr.py` | PostToolUse (Write\|Edit) | Validates ADR shape and frontmatter |
+  | `khook-dispatch-guardians.py` | PostToolUse (Write\|Edit) | PostToolUse guardian dispatch safety net |
 
-  Its ADR-review nudge table ships **empty** on purpose: a nudge may only name
-  ADRs this clone actually has ([[adr-02-harness]] rule 6). Each project fills
-  it in as it writes its own ADRs.
-- **`docs/agents/`** — agent role definitions. Guardians (`kbot-prd`,
-  `kbot-adr`) gate the PRD and ADR set ([[adr-03-guardians]]); both
-  declare `model_preference: cheap` and triage before opening law bodies.
-  The `kwf-*` cast (18 nodes) runs issue delivery ([[adr-04-issue-delivery]]).
-  The rest of the `kbot-*` roster are the orchestration workers
-  `kskill-orchestrator` dispatches: `kbot-planner`, `kbot-builder`,
-  `kbot-auditor`, `kbot-critic`, `kbot-low` / `-medium` / `-high`,
-  `kbot-janitor`, `kbot-changelog`, `kbot-document-this`, `kbot-evaluate`.
-  `.claude/agents/` at the root is the Claude Code link to this folder —
-  one real copy, links everywhere else; Kimi uses `extra_agent_dirs`;
-  Cursor/Grok injects the files per `runtimes.md`.
-
-Tooling lives under `docs/` with the knowledge it belongs to, but the vault
-excludes it: tooling conventions fix their filenames (a skill is always a
-`SKILL.md`), which would collide with the vault's naming rule below.
+- **`agents/`** — autonomous agent role definitions.
+  - Guardians (`kbot-prd`, `kbot-adr`) gate the PRD, constitution, and ADR set.
+  - The `kwf-*` cast (18 nodes) executes issue delivery ([[adr-04-guardians-and-delivery]]).
+  - The `kbot-*` roster provides specialized worker agents for `k-orchestrator`:
+    `kbot-planner`, `kbot-builder`, `kbot-auditor`, `kbot-critic`, `kbot-low` / `-medium` / `-high`,
+    `kbot-janitor`, `kbot-changelog`, `kbot-document-this`, `kbot-evaluate`.
+  - `.claude/agents/` at root symlinks to `agents/`.
 
 ## The vault
 
-The vault root is `docs/`: everything documental is indexed, except the
-tooling folders above. It is served as an Obsidian-style vault by
-[markdown-vault-mcp](https://github.com/pvliesdonk/markdown-vault-mcp)
-(recommended). The server config ships in `.mcp.json`; the local index lives
-in `.mvmcp/` and is gitignored, so each clone builds its own.
+The vault root is `docs/`: everything documental is indexed, while root harness folders (`adrs/`, `agents/`, `hooks/`, `skills/`) remain separate. It is served as an Obsidian-style vault by
+[markdown-vault-mcp](https://github.com/pvliesdonk/markdown-vault-mcp). The server config ships in `.mcp.json`.
 
-```
+```bash
 uv tool install markdown-vault-mcp
 ```
 
 Working rules:
 
-- **Query the vault first** for any documentation question — search, read,
-  backlinks, similarity — before grepping the markdown by hand.
-- **Basenames are unique vault-wide.** A wikilink resolves by basename;
-  duplicates make it resolve to the wrong file. This is why folders are kept
-  alive with `.gitkeep`, never with placeholder readmes, and why the
-  repository's only `README.md` sits at the root, outside the vault.
-- **Wikilinks are welcome** between notes: `[[adr-00-discipline]]`,
-  `[[HARNESS]]`. The vault tracks them as a graph — backlinks, orphans,
-  broken links are all queryable.
+- **Query the vault first** for any documentation question before grepping by hand.
+- **Basenames are unique vault-wide.** A wikilink resolves by basename.
+- **Wikilinks are welcome** between notes: `[[adr-00-adr-doctrine]]`,
+  `[[HARNESS]]`.
 - **Reindex after a batch of edits** before trusting link queries again.
+
