@@ -59,8 +59,9 @@ def test_hooks_standalone_execution():
 def test_guardian_dispatch_bundle():
     script = HOOKS_DIR / "khook-guardian-dispatch"
     assert script.is_file(), "khook-guardian-dispatch missing"
+    # Test against previous commit to ensure non-empty diff and bundle emission
     res = subprocess.run(
-        [sys.executable, str(script), "--bundle"],
+        [sys.executable, str(script), "--bundle", "HEAD~1"],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -69,6 +70,7 @@ def test_guardian_dispatch_bundle():
     assert res.returncode in (0, 1), f"khook-guardian-dispatch --bundle crashed: {res.stderr}"
     assert "--- bundle (adr-04-guardians-and-delivery) ---" in res.stdout, "Missing bundle header in output"
     assert "## adr_index" in res.stdout, "Missing adr_index in bundle output"
+
 
 
 def test_adr_linter_cli():
