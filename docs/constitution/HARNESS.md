@@ -57,12 +57,12 @@ Only a yes to the first and a no to the second puts it in the constitution.
 ## adrs/
 
 Architecture Decision Records: the memory of the why, not just the what. An
-ADR is attached to a *theme* and states numbered rules; its policy may change
-many times in place — each displaced policy recorded in the ADR's own
-`REJECTED` section — without the file ever moving. Presence in `adrs/`
-is what makes a rule binding, and a whole file retires to `docs/obsolete/`
-only when its theme ends. Discipline and template in
-[[adr-00-adr-doctrine]]. Standing order of the harness ADRs:
+ADR states numbered rules; presence in `adrs/` is what makes a rule binding.
+Any semantic change executes the supersession protocol ([[adr-00-adr-doctrine]]):
+the superseded body moves to `docs/obsolete/defered-adr-NN-slug.md`, the original
+keeps only its frontmatter with `status: defered`, and any replacement is written
+as a new ADR. Discipline and template in [[adr-00-adr-doctrine]]. Standing order
+of the harness ADRs:
 
 | ADR | Theme |
 |---|---|

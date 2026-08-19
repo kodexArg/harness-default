@@ -28,11 +28,8 @@ REQUIRED_KEYS = (
     "description",
     "applies_when",
 )
-DESCRIPTION_MIN_WORDS = 20
-DESCRIPTION_MAX_WORDS = 50
-
-
-import subprocess
+DESCRIPTION_MIN_WORDS = 25
+DESCRIPTION_MAX_WORDS = 45
 
 
 def project_dir() -> Path:

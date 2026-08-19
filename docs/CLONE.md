@@ -75,23 +75,12 @@ The law skills, always in force:
 - `skills/k-triage-and-fix` — GitHub issue → PR party.
 
 The stack, docs, and orchestration skills ship too — inventory and grouping in
-[[HARNESS]]. Every one of them opens with a **ported-skill banner**: their
-bodies still cite the origin clone's ADRs and hardcode its cloud accounts,
-profiles, slugs and paths ([[adr-02-harness-layout]] rule 5). Two jobs per skill you
-keep:
+[[HARNESS]]. Two jobs per skill you evaluate:
 
-1. **Remap** its citations to this project's own ADRs and its specifics to this
-   project's own values, then delete the banner.
+1. **Configure** its specifics to this project's own tools and workflow values.
 2. **Delete what this project does not use** — a clone that never needs
    reporting or specialized orchestration should remove those skills. Dead skills
    are noise in every discovery listing.
-
-
-A kept skill still wearing its banner is unfinished, not configured.
-
-`k-reporte` keeps `references/` and `scripts/` as in-tree relative
-symlinks into `k-report/` (one copy of tokens, templates, validator). If
-you delete the English twin, delete the Spanish one with it.
 
 Do **not** add product assertions until the owner reserves compute for a law
 ([[assertion-00-discipline]]).

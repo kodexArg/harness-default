@@ -59,10 +59,9 @@ def test_hooks_standalone_execution():
 def test_guardian_dispatch_bundle():
     script = HOOKS_DIR / "khook-guardian-dispatch"
     assert script.is_file(), "khook-guardian-dispatch missing"
-    # Test against origin/main or HEAD~2 to verify guardian detection and bundle payload
-    ref = "origin/main"
+    # Test against HEAD~1 (or working tree) to verify guardian detection and bundle payload
     res = subprocess.run(
-        [sys.executable, str(script), "--bundle", ref],
+        [sys.executable, str(script), "--bundle", "HEAD~1"],
         cwd=ROOT,
         capture_output=True,
         text=True,

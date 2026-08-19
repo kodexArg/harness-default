@@ -6,8 +6,6 @@ tools:
   - Read
   - Grep
   - Glob
-  - Edit
-  - Write
 related_adrs:
   - adr-00-adr-doctrine
   - adr-01-constitution

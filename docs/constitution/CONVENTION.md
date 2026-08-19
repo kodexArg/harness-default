@@ -31,9 +31,8 @@ Rules:
   to decide relevance without opening the body.
 - A document that is present is valid — validity lives in the tree, not in
   an annotation. Information that stops being true is removed: deleted,
-  retired whole to `docs/obsolete/`, or recorded as displaced policy inside
-  the owning ADR — `REJECTED`, or `FORBIDDEN` when the old way is now
-  prohibited.
+  retired whole to `docs/obsolete/`, or superseded per
+  [[adr-00-adr-doctrine]].
 - Document families may extend the base set with their own keys — assertions
   add `verified` — or their discipline file may own the frontmatter outright:
   ADRs carry exactly 10 fields of their own, and presence in `adrs/`

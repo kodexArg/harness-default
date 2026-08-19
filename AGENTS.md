@@ -80,5 +80,5 @@ The repository maintains **one real copy** of every harness artifact at the root
 | Harness Suite (`python3 tests/harness/run_all.py`) | CI / Local | Every PR / commit touching harness | **Yes** |
 | ADR Schema & Doctrine (`khook-check-adr.py`) | Hook / CI | Changes to `adrs/*.md` | **Yes** |
 | API Conformance (`khook-check-api.py`) | Hook / CI | Changes declaring routes | **Yes** |
-| Guardian Safety Net (`khook-guardian-dispatch`) | Hook / Operator | Pre-commit & PR close | **Yes** (if owed) |
+| Guardian Safety Net (`khook-guardian-dispatch`) | Hook / Operator | Pre-commit (warns), PR close | **Yes** (at PR close) |
 | Live-Doc Sync (`python3 skills/k-live-doc/link.py --check`) | CI / Local | Changes to code / docs | **Yes** |

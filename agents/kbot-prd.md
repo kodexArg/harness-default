@@ -6,8 +6,6 @@ tools:
   - Read
   - Grep
   - Glob
-  - Edit
-  - Write
 related_adrs:
   - adr-01-constitution
   - adr-04-guardians-and-delivery

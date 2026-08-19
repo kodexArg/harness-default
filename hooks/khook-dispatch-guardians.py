@@ -6,15 +6,15 @@ adr_reminder.py, merged for the nudge-dedup issue). It does two jobs in a
 single output block:
   - maps every written file to the guardians watching it and nudges a
     dispatch to verify the change; the watchlist is DELEGATED to
-    docs/hooks/khook-guardian-dispatch, which reads it live from each guardian's
-    own frontmatter `watch:` list — the single machine copy (adr-03-guardians
-    rule 8). This hook carries no watchlist of its own;
+    hooks/khook-guardian-dispatch, which reads it live from each guardian's
+    own frontmatter `watch:` list — the single machine copy (adr-04-guardians-and-delivery).
+    This hook carries no watchlist of its own;
   - names the ADR(s) to review when a governance-sensitive file is touched
     via RULES — wikilinks and a one-line "why review" only, never rule
     restatement (adr-00 rule 1).
 
-This is the Claude-native safety net adr-03-guardians rule 3 describes; the
-runtime-agnostic mechanism is docs/hooks/khook-guardian-dispatch, callable by any
+This is the Claude-native safety net adr-04-guardians-and-delivery describes; the
+runtime-agnostic mechanism is hooks/khook-guardian-dispatch, callable by any
 harness or a human with no Claude dependency.
 
 Both jobs dedupe per session-scoped batch: each guardian/ADR is named once
@@ -57,7 +57,7 @@ def _load_guardian_dispatch(root):
 #
 # EMPTY IN THE TEMPLATE ON PURPOSE. This table is the ADR-review nudge, and a
 # nudge may only name ADRs that actually exist in this clone — a wikilink to an
-# ADR the project never wrote is invented law ([[adr-02-harness]] rule 2), and a
+# ADR the project never wrote is invented law ([[adr-02-harness-layout]] rule 2), and a
 # gate with no governing ADR to point at is incomplete (same ADR, rule 3). The
 # harness ships adr-00..adr-04 (discipline, constitution, harness, guardians,
 # delivery); none of them govern a code path by glob, so there is nothing
@@ -65,7 +65,7 @@ def _load_guardian_dispatch(root):
 #
 # Each clone fills this in as it writes its own ADRs. One entry per governed
 # surface, wikilinks + a one-line "why review" only — never a restatement of
-# the rule ([[adr-00-discipline]] rule 1). Example shape for a project that has
+# the rule ([[adr-00-adr-doctrine]] rule 1). Example shape for a project that has
 # written an API ADR:
 #
 #   (
@@ -78,9 +78,6 @@ def _load_guardian_dispatch(root):
 # The guardian-dispatch half of this hook needs no configuration — it reads
 # every watchlist live from each agent's `watch:` frontmatter.
 RULES = ()
-
-
-import subprocess
 
 
 def project_dir() -> Path:
@@ -118,7 +115,7 @@ def _matches_watchlist_entry(rel, pattern):
 
 def guardians_for(rel: str, root: Path) -> list[str]:
     """Reads the live watchlists via the agnostic guardian-dispatch script.
-    Filters to guardian roles (kbot-prd, kbot-adr, etc.)."""
+    Filters to guardian roles (kbot-prd, kbot-adr)."""
     module = _load_guardian_dispatch(root)
     if module is None:
         return []
@@ -126,7 +123,7 @@ def guardians_for(rel: str, root: Path) -> list[str]:
     hits = []
     for agent, patterns in lists.items():
         # Only guardian agents gate document/ADR health
-        if not agent.startswith("kbot-"):
+        if agent not in {"kbot-prd", "kbot-adr"}:
             continue
         for pattern in patterns:
             if _matches_watchlist_entry(rel, pattern):

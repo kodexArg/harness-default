@@ -23,8 +23,8 @@ REQUIRED_KEYS = (
     "applies_when",
 )
 
-DESCRIPTION_MIN_WORDS = 20
-DESCRIPTION_MAX_WORDS = 50
+DESCRIPTION_MIN_WORDS = 25
+DESCRIPTION_MAX_WORDS = 45
 
 
 def split_frontmatter(text: str) -> tuple[str, str]:
@@ -70,8 +70,8 @@ def test_adr_frontmatters():
             failures.append(f"{rel}: type must be `adr`, got `{adr_type}`")
 
         status = scalar(fm, "status")
-        if status not in ("active", "defered", "superseded"):
-            failures.append(f"{rel}: invalid status `{status}`")
+        if status not in ("active", "defered"):
+            failures.append(f"{rel}: invalid status `{status}` (allowed: active, defered)")
 
         desc = scalar(fm, "description") or ""
         words = len(desc.split())

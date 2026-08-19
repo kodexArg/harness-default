@@ -89,8 +89,8 @@ Combine diffs, run `kwf-priest` for secrets check.
 
 ### 4. Stalking
 Dispatch `kwf-shadow` for blind code review against combined diff.
-- `holds` $	o$ proceed to tribunal.
-- `needs-work` $	o$ maximum 1 rebuild retry.
+- `holds` -> proceed to tribunal.
+- `needs-work` -> maximum 1 rebuild retry.
 
 ### 5. Tribunal
 Run guardians (`kbot-adr`, `kbot-prd`) with `python3 hooks/khook-guardian-dispatch --bundle`.

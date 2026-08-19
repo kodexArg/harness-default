@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Issue -> Worktree -> PR nudge (PreToolUse on Bash).
 
-Layer 2 of the enforcement stack in adr-04-issue-delivery: a bypassable local
+Layer 2 of the enforcement stack in adr-04-guardians-and-delivery: a bypassable local
 reminder, never the boundary. It fires on a git commit or a push at main/prod and
 prints the flow to context; it also fires on a `git worktree remove` to nudge the
-rule-5 ordering (remove only after the PR merges, never before). It never denies
+ordering (remove only after the PR merges, never before). It never denies
 (exit 0 always). The only inviolable gate is GitHub branch protection, which this
 template does not ship — each clone enables it on its own repo.
 """
@@ -58,8 +58,8 @@ def _open_pr_note(cmd):
             return None
         return (
             "PR #" + ", #".join(numbers) + " for branch " + branch +
-            " is still OPEN: removing this worktree now is early per adr-19 "
-            "rule 5 (remove on merge, not before)."
+            " is still OPEN: removing this worktree now is early per adr-04-guardians-and-delivery "
+            "rule 3 (remove on merge, not before)."
         )
     except Exception:
         return None
