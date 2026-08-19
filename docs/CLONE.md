@@ -82,9 +82,10 @@ keep:
 
 1. **Remap** its citations to this project's own ADRs and its specifics to this
    project's own values, then delete the banner.
-2. **Delete what this project does not use** — a clone that never touches AWS
-   should not carry ten AWS skills, and a Django-less clone should drop
-   `k-django-6-drf`. Dead skills are noise in every discovery listing.
+2. **Delete what this project does not use** — a clone that never needs
+   reporting or specialized orchestration should remove those skills. Dead skills
+   are noise in every discovery listing.
+
 
 A kept skill still wearing its banner is unfinished, not configured.
 

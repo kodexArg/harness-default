@@ -5,9 +5,10 @@ status: active
 created: 2026-08-18
 tags: [adr, constitution, hierarchy, authority]
 paths:
-  - "docs/PRD.md"
+  - "docs/constitution/PRD.md"
   - "docs/constitution/*.md"
   - "docs/*.md"
+
 related_adrs:
   - "adr-00-adr-doctrine"
   - "adr-02-harness-layout"

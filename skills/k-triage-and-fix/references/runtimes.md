@@ -103,6 +103,7 @@ and law links in the agent file win.
 | cheap (default) | Kimi `kimi-for-coding` · Claude Haiku-class · Cursor `kbot-low` or native `guardian-*` with cheapest available model |
 | escalate | mid/high only when triage cannot return the one-line pass |
 
-Owner always runs `python3 docs/hooks/khook-guardian-dispatch --bundle …` and
-inlines that stdout into the guardian prompt before spawn. Do not let the
+Owner always runs `python3 hooks/khook-guardian-dispatch --bundle …` and
+pastes that payload into each owed guardian prompt (parallel; cheap tier).
+ Do not let the
 guardian rediscover the batch.

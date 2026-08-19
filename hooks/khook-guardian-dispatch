@@ -123,10 +123,13 @@ def watchlists(root: Path) -> dict[str, list[str]]:
             paths = parse_sequence(fm_block, "paths")
             agents = parse_sequence(fm_block, "related_agents")
             for agent in agents:
+                if not agent.startswith("kbot-"):
+                    continue
                 lists.setdefault(agent, [])
                 for p in paths:
                     if p not in lists[agent]:
                         lists[agent].append(p)
+
 
     # 2. Agent-declared watchlists (watch: or paths: in agents/*.md)
     agents_dir = root / "agents"
